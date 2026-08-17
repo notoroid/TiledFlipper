@@ -48,27 +48,20 @@ struct Tile {
     }
 }
 
-/// タイル群の状態と、選択タイルのランダムウォークを管理する。
+/// タイル群の状態を保持し、流れてくる差し替え指示を反映する。
+///
+/// どのタイルをどの画像にするかは決めない。それは `TileFlip` を流す供給元
+/// (`RandomWalkTileFlipFeed` など) の担当で、このモデルは受け取った指示を
+/// フリップの見た目に変換することだけを受け持つ。
 @MainActor
 @Observable
 final class TileGridModel {
-    /// グリッド上の位置
-    struct Position {
-        var row: Int
-        var column: Int
-    }
-
     let rows: Int
     let columns: Int
     /// フリップ 1 回分の長さ
     let flipDuration: TimeInterval = 0.6
-    /// 選択が次のタイルへ移るまでの間隔。
-    /// `flipDuration` より短くすることで、フリップが完了する前に次が始まり、
-    /// 連鎖しているように見える。
-    let stepInterval: Duration = .milliseconds(90)
 
     private(set) var tiles: [Tile]
-    private var cursor: Position
 
     init(rows: Int, columns: Int) {
         self.rows = rows
@@ -77,61 +70,25 @@ final class TileGridModel {
             let artwork = ArtworkCatalog.names.randomElement() ?? ""
             return Tile(artwork: artwork, previousArtwork: artwork, flipStart: nil)
         }
-        self.cursor = Position(
-            row: Int.random(in: 0..<rows),
-            column: Int.random(in: 0..<columns)
-        )
     }
 
-    /// 選択タイルのフリップを開始し、続けて選択を隣へ移す。
-    /// フリップの完了は待たない。
-    func advance(now: Date = .now) {
-        startFlip(at: cursor, now: now)
-        if let next = randomNeighbor(of: cursor) {
-            cursor = next
-        }
-    }
-
-    /// 一定間隔で選択を進め続ける。
-    func run() async {
-        while !Task.isCancelled {
-            advance()
-            try? await Task.sleep(for: stepInterval)
-        }
-    }
-
-    /// 選択タイルのフリップを開始する。
-    /// すでにフリップ中なら、それを中断して新しいフリップに差し替える。
-    private func startFlip(at position: Position, now: Date) {
-        let index = position.row * columns + position.column
-        var tile = tiles[index]
-
-        // 中断の場合、除外すべきは「いま見えている」アートワーク。
-        // これを外さないと、同じ画像へのフリップになり変化が見えないことがある。
-        let displayed = tile.appearance(at: now, duration: flipDuration).artwork
-        guard let next = ArtworkCatalog.randomName(excluding: displayed) else { return }
-
-        tile.restartFlip(to: next, at: now, duration: flipDuration)
-        tiles[index] = tile
-    }
-
-    private static let directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
-    /// 上下左右のランダムな方向へ 1 マス動いた位置を返す。
+    /// 流れてくる差し替え指示を、届いた順にタイルへ反映し続ける。
     ///
-    /// 範囲外に出た場合は移動前の位置から別の方向を試し直す。
-    /// 試していない方向からランダムに選び直すのは、範囲外を捨てて
-    /// 引き直し続けるのと同じ結果になり、かつ必ず終了する。
-    private func randomNeighbor(of position: Position) -> Position? {
-        for (rowDelta, columnDelta) in Self.directions.shuffled() {
-            let candidate = Position(
-                row: position.row + rowDelta,
-                column: position.column + columnDelta
-            )
-            if (0..<rows).contains(candidate.row), (0..<columns).contains(candidate.column) {
-                return candidate
-            }
+    /// ストリームが終わるか、呼び出し元の Task がキャンセルされるまで戻らない。
+    func apply(_ flips: AsyncStream<TileFlip>) async {
+        for await flip in flips {
+            apply(flip)
         }
-        return nil
+    }
+
+    /// 差し替え指示を 1 件反映する。
+    /// すでにフリップ中のタイルなら、それを中断して新しいフリップに差し替える。
+    func apply(_ flip: TileFlip, at now: Date = .now) {
+        guard (0..<rows).contains(flip.row), (0..<columns).contains(flip.column) else { return }
+
+        let index = flip.row * columns + flip.column
+        var tile = tiles[index]
+        tile.restartFlip(to: flip.artwork, at: now, duration: flipDuration)
+        tiles[index] = tile
     }
 }

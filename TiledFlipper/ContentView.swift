@@ -51,7 +51,11 @@ struct TileLayout {
     }
 }
 
-/// 9 行 9 列のタイルを画面中央に表示し、選択タイルを次々にフリップさせるビュー。
+/// グリッドの大きさ。モデルと差し替え指示の供給元が同じ大きさを共有する。
+private let gridRows = 9
+private let gridColumns = 9
+
+/// 9 行 9 列のタイルを画面中央に表示し、指示されたタイルを次々にフリップさせるビュー。
 ///
 /// タイル数の増加や高頻度の再描画に耐えるため、タイルごとに View を作らず
 /// `Canvas` で 1 パスにまとめて描画する。アニメーションは SwiftUI の暗黙
@@ -61,7 +65,10 @@ struct ContentView: View {
     /// タイル同士の間隔
     private let spacing: CGFloat = 5
 
-    @State private var model = TileGridModel(rows: 9, columns: 9)
+    @State private var model = TileGridModel(rows: gridRows, columns: gridColumns)
+    /// 差し替え指示の供給元。いまはランダムウォークだが、モデルとは独立しているので
+    /// 別の演出を流す供給元へ差し替えられる。
+    @State private var feed = RandomWalkTileFlipFeed(rows: gridRows, columns: gridColumns)
 
     var body: some View {
         GeometryReader { proxy in
@@ -91,7 +98,7 @@ struct ContentView: View {
         }
         .background(Color.black)
         .ignoresSafeArea()
-        .task { await model.run() }
+        .task { await model.apply(feed.flips()) }
     }
 
     /// フリップの進行度に応じて、横に潰したアートワークを描く。
