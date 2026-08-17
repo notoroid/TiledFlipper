@@ -68,9 +68,10 @@ struct ContentView: View {
     @State private var model = TileGridModel(rows: gridRows, columns: gridColumns)
     /// 差し替え指示の供給元。`TileFlipFeed` に適合する別の演出
     /// (`RandomWalkTileFlipFeed` など) へ差し替えても、ここから下の扱いは変わらない。
-    @State private var feed: any TileFlipFeed = ZigzagTileFlipFeed(
+    @State private var feed: any TileFlipFeed = RandomizedTileFlipFeed(
         rows: gridRows,
-        columns: gridColumns
+        columns: gridColumns,
+        flipDuration: .seconds(TileGridModel.flipDuration)
     )
 
     var body: some View {
