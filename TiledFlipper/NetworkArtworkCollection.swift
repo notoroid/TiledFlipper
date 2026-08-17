@@ -20,24 +20,11 @@ struct NetworkArtworkDescription: Sendable, Hashable {
 @MainActor
 class TileFlipServcice {
 
-    /// 配布先の URL を埋め込んだ plist。
-    ///
-    /// 中身はリポジトリではなく `ArtworkPackageEndpoint.local.txt` (git 管理外) にあり、
-    /// ビルドフェイズ "Embed Artwork Package Endpoint" がこの plist にして同梱する。
-    private static let endpointResourceName = "ArtworkPackageEndpoint"
-    private static let packageURLKey = "ArtworkPackageURL"
-
     /// 埋め込まれた配布先。URL を書いていないビルドでは nil になる。
-    private static var packageURL: URL? {
-        guard let plist = Bundle.main.url(forResource: endpointResourceName, withExtension: "plist"),
-              let values = NSDictionary(contentsOf: plist) as? [String: Any],
-              let string = values[packageURLKey] as? String,
-              !string.isEmpty
-        else {
-            return nil
-        }
-        return URL(string: string)
-    }
+    private static var packageURL: URL? { EmbeddedEndpoints.artworkPackageURL }
+
+    /// 埋め込まれたサービスのエンドポイント。同じく書いていなければ nil。
+    static var serviceURL: URL? { EmbeddedEndpoints.serviceURL }
 
     static func getDescriptions() async throws -> [NetworkArtworkDescription] {
         try await Task.sleep(for: .milliseconds(500))

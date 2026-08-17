@@ -220,6 +220,7 @@
 			alwaysOutOfDate = 1;
 			inputPaths = (
 				"$(SRCROOT)/ArtworkPackageEndpoint.local.txt",
+				"$(SRCROOT)/TiledFlipperEndpoint.local.txt",
 			);
 			name = "Embed Artwork Package Endpoint";
 			outputPaths = (
@@ -227,28 +228,40 @@
 			);
 			shellPath = /bin/sh;
 			shellScript = (
-				"# Albumartworks の配布 URL はリポジトリに置かない。",
-				"# ${SRCROOT}/ArtworkPackageEndpoint.local.txt (git 管理外) から読んで、",
+				"# アートワークの配布 URL とサーバーの URL はリポジトリに置かない。",
+				"# ${SRCROOT}/*.local.txt (git 管理外) から読んで、",
 				"# アプリバンドルの ArtworkPackageEndpoint.plist に埋め込む。",
 				"set -euo pipefail",
 				"",
-				"ENDPOINT_FILE=\"${SRCROOT}/ArtworkPackageEndpoint.local.txt\"",
+				"ARTWORK_PACKAGE_FILE=\"${SRCROOT}/ArtworkPackageEndpoint.local.txt\"",
+				"SERVICE_FILE=\"${SRCROOT}/TiledFlipperEndpoint.local.txt\"",
 				"OUTPUT_PLIST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ArtworkPackageEndpoint.plist\"",
 				"",
-				"ENDPOINT=\"\"",
-				"if [ -f \"${ENDPOINT_FILE}\" ]; then",
-				"    # コメント (#) と空行を飛ばして、最初の 1 行だけを URL として使う。",
-				"    ENDPOINT=$(grep -v -e '^[[:space:]]*#' -e '^[[:space:]]*$' \"${ENDPOINT_FILE}\" | head -n 1 | tr -d '[:space:]' || true)",
+				"# コメント (#) と空行を飛ばして、最初の 1 行だけを URL として使う。",
+				"read_endpoint() {",
+				"    if [ -f \"$1\" ]; then",
+				"        grep -v -e '^[[:space:]]*#' -e '^[[:space:]]*$' \"$1\" | head -n 1 | tr -d '[:space:]' || true",
+				"    fi",
+				"}",
+				"",
+				"ARTWORK_PACKAGE_URL=$(read_endpoint \"${ARTWORK_PACKAGE_FILE}\")",
+				"SERVICE_URL=$(read_endpoint \"${SERVICE_FILE}\")",
+				"",
+				"if [ -z \"${ARTWORK_PACKAGE_URL}\" ]; then",
+				"    echo \"warning: ${ARTWORK_PACKAGE_FILE} に配布 URL がありません (オンラインのコレクションは出ません)\"",
 				"fi",
 				"",
-				"if [ -z \"${ENDPOINT}\" ]; then",
-				"    echo \"warning: ${ENDPOINT_FILE} に配布 URL がありません (オンラインのコレクションは出ません)\"",
+				"if [ -z \"${SERVICE_URL}\" ]; then",
+				"    echo \"warning: ${SERVICE_FILE} にサーバーの URL がありません\"",
 				"fi",
 				"",
 				"# URL が無いときも空の plist を作る。declared output なので必ず要る。",
 				"mkdir -p \"$(dirname \"${OUTPUT_PLIST}\")\"",
 				"rm -f \"${OUTPUT_PLIST}\"",
-				"/usr/libexec/PlistBuddy -c \"Add :ArtworkPackageURL string ${ENDPOINT}\" -c \"Save\" \"${OUTPUT_PLIST}\" > /dev/null",
+				"/usr/libexec/PlistBuddy \\",
+				"    -c \"Add :ArtworkPackageURL string ${ARTWORK_PACKAGE_URL}\" \\",
+				"    -c \"Add :ServiceEndpointURL string ${SERVICE_URL}\" \\",
+				"    -c \"Save\" \"${OUTPUT_PLIST}\" > /dev/null",
 				"",
 			);
 		};
