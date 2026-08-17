@@ -26,6 +26,8 @@ final class ZigzagTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
+    /// 差し替え先のアートワークを選ぶ元になるコレクション
+    let catalog: ArtworkCatalog
     /// 隣のマスへ進むまでの間隔。
     /// フリップ 1 回分より短くすることで、フリップが完了する前に次のマスが始まり、
     /// 尾を引いて流れているように見える。
@@ -37,9 +39,15 @@ final class ZigzagTileFlipFeed: TileFlipFeed {
     /// 同じ画像への差し替えを避け、変化が必ず見えるようにするために覚えておく。
     private var lastArtworks: [String?]
 
-    init(rows: Int, columns: Int, stepInterval: Duration = .milliseconds(90)) {
+    init(
+        rows: Int,
+        columns: Int,
+        catalog: ArtworkCatalog,
+        stepInterval: Duration = .milliseconds(90)
+    ) {
         self.rows = rows
         self.columns = columns
+        self.catalog = catalog
         self.stepInterval = stepInterval
         self.lastArtworks = Array(repeating: nil, count: max(0, rows * columns))
     }
@@ -119,7 +127,7 @@ final class ZigzagTileFlipFeed: TileFlipFeed {
     /// 指定したマスへの差し替え指示を作る。
     private func nextFlip(row: Int, column: Int) -> TileFlip? {
         let index = row * columns + column
-        guard let artwork = ArtworkCatalog.randomName(excluding: lastArtworks[index]) else {
+        guard let artwork = catalog.randomName(excluding: lastArtworks[index]) else {
             return nil
         }
         lastArtworks[index] = artwork

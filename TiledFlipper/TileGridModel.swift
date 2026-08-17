@@ -68,14 +68,17 @@ final class TileGridModel {
 
     let rows: Int
     let columns: Int
+    /// タイルに表示するアートワークの一覧。描画する側も同じものから画像を引く。
+    let catalog: ArtworkCatalog
 
     private(set) var tiles: [Tile]
 
-    init(rows: Int, columns: Int) {
+    init(rows: Int, columns: Int, catalog: ArtworkCatalog) {
         self.rows = rows
         self.columns = columns
+        self.catalog = catalog
         self.tiles = (0..<(rows * columns)).map { _ in
-            let artwork = ArtworkCatalog.names.randomElement() ?? ""
+            let artwork = catalog.names.randomElement() ?? ""
             return Tile(artwork: artwork, previousArtwork: artwork, flipStart: nil)
         }
     }

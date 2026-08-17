@@ -65,16 +65,72 @@ struct ContentView: View {
     /// タイル同士の間隔
     private let spacing: CGFloat = 5
 
-    @State private var model = TileGridModel(rows: gridRows, columns: gridColumns)
-    /// 差し替え指示の供給元。`TileFlipFeed` に適合する別の演出
-    /// (`RandomWalkTileFlipFeed` など) へ差し替えても、ここから下の扱いは変わらない。
-    @State private var feed: any TileFlipFeed = RandomizedTileFlipFeed(
+    /// 表示中のアートワークコレクション
+    @State private var selection = ArtworkCatalog.defaultCollection
+    @State private var model = TileGridModel(
         rows: gridRows,
         columns: gridColumns,
-        flipDuration: .seconds(TileGridModel.flipDuration)
+        catalog: ArtworkCatalog.catalog(for: ArtworkCatalog.defaultCollection)
     )
+    /// カード一覧を出しているか。切り替えるとき以外は畳んでおく。
+    @State private var isCollectionListVisible = false
 
     var body: some View {
+        tiles
+            .overlay(alignment: .bottomTrailing) { collectionSwitcher }
+            .background(Color.black.ignoresSafeArea())
+            // コレクションが変わったら、その画像でタイルを組み直して演出を流し直す。
+            // 前の演出は Task のキャンセルでストリームが終わり、自然に止まる。
+            .task(id: selection) {
+                let catalog = ArtworkCatalog.catalog(for: selection)
+                // 起動直後は @State の初期値がすでに選択中のコレクションなので作り直さない
+                if model.catalog.collection != selection {
+                    model = TileGridModel(rows: gridRows, columns: gridColumns, catalog: catalog)
+                }
+
+                // 差し替え指示の供給元。`TileFlipFeed` に適合する別の演出
+                // (`RandomWalkTileFlipFeed` など) へ差し替えても、ここから下の扱いは変わらない。
+                let feed = RandomizedTileFlipFeed(
+                    rows: gridRows,
+                    columns: gridColumns,
+                    catalog: catalog,
+                    flipDuration: .seconds(TileGridModel.flipDuration)
+                )
+                await model.apply(feed.flips())
+            }
+    }
+
+    /// 画面右下のボタンと、そこから開くアートワークコレクションのカード一覧。
+    ///
+    /// 一覧はタイルの領域を狭めず上に重ねて出す。横長の画面ではタイルの大きさが
+    /// 画面の高さで決まるので、常に置いておくとタイルが小さくなってしまうため。
+    private var collectionSwitcher: some View {
+        VStack(alignment: .trailing, spacing: 12) {
+            if isCollectionListVisible {
+                ArtworkCollectionCardList(
+                    collections: ArtworkCatalog.collections,
+                    previewRows: gridRows,
+                    previewColumns: gridColumns,
+                    selection: $selection
+                )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+
+            Button {
+                withAnimation(.snappy) { isCollectionListVisible.toggle() }
+            } label: {
+                Image(systemName: "square.stack")
+                    .font(.title2)
+            }
+            .buttonStyle(.glass)
+            .accessibilityLabel("Artwork collections")
+            .padding(.trailing, 16)
+        }
+        .padding(.bottom, 16)
+    }
+
+    /// タイル全体。行・列数ぶんのタイルを 1 つの Canvas にまとめて描く。
+    private var tiles: some View {
         GeometryReader { proxy in
             let layout = TileLayout(
                 rows: model.rows,
@@ -100,9 +156,6 @@ struct ContentView: View {
                 }
             }
         }
-        .background(Color.black)
-        .ignoresSafeArea()
-        .task { await model.apply(feed.flips()) }
     }
 
     /// フリップの進行度に応じて、横に潰したアートワークを描く。
@@ -126,7 +179,7 @@ struct ContentView: View {
 
         // 画像が透過を含んでいてもタイルの形が保たれるよう、下地を敷いてから描く
         context.fill(Path(rect), with: .color(Self.tileBackground))
-        if let image = ArtworkCatalog.image(named: appearance.artwork) {
+        if let image = model.catalog.image(named: appearance.artwork) {
             context.draw(image, in: rect)
         }
 

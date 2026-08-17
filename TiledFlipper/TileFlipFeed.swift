@@ -48,6 +48,8 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
+    /// 差し替え先のアートワークを選ぶ元になるコレクション
+    let catalog: ArtworkCatalog
     /// 選択が次のタイルへ移るまでの間隔。
     /// TileGridModel のフリップ 1 回分より短くすることで、フリップが完了する前に
     /// 次が始まり、連鎖しているように見える。
@@ -58,9 +60,15 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
     /// 同じ画像への差し替えを避け、変化が必ず見えるようにするために覚えておく。
     private var lastArtworks: [String?]
 
-    init(rows: Int, columns: Int, stepInterval: Duration = .milliseconds(90)) {
+    init(
+        rows: Int,
+        columns: Int,
+        catalog: ArtworkCatalog,
+        stepInterval: Duration = .milliseconds(90)
+    ) {
         self.rows = rows
         self.columns = columns
+        self.catalog = catalog
         self.stepInterval = stepInterval
         self.cursor = Position(
             row: Int.random(in: 0..<rows),
@@ -96,7 +104,7 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
         }
 
         let index = position.row * columns + position.column
-        guard let artwork = ArtworkCatalog.randomName(excluding: lastArtworks[index]) else {
+        guard let artwork = catalog.randomName(excluding: lastArtworks[index]) else {
             return nil
         }
         lastArtworks[index] = artwork
