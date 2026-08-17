@@ -15,17 +15,31 @@ struct TileFlip: Sendable {
     var artwork: String
 }
 
+/// 差し替え指示をタイルへ流し込む供給元。
+///
+/// TileGridModel は「どのタイルをどの画像にするか」をこの供給元に任せ、
+/// 受け取った `TileFlip` を見た目へ反映することだけを受け持つ。演出を変えるには
+/// この protocol に適合する型を用意して差し替えればよく、受け取る側は変わらない。
+///
+/// 生成する側と受け取る側の両方から参照される共有オブジェクトなので、参照型に限る。
+@MainActor
+protocol TileFlipFeed: AnyObject {
+    /// 指示を流す対象のグリッドの大きさ。受け取る側と揃っている必要がある。
+    var rows: Int { get }
+    var columns: Int { get }
+
+    /// 差し替え指示を流すストリームを作る。
+    ///
+    /// 受け取り側が読むのをやめたら、生成側も止まること。
+    func flips() -> AsyncStream<TileFlip>
+}
+
 /// ランダムウォークで選んだタイルへの差し替え指示を流し続ける供給元。
 ///
-/// TileGridModel からは独立していて、グリッドの大きさと歩き方しか知らない。
-/// 指示は `AsyncStream<TileFlip>` で渡すので、別の演出 (順番に流す、外部の
-/// イベントに合わせて流すなど) へ供給元を差し替えても、受け取る側はストリームを
-/// 読むだけで変わらない。
-///
-/// 生成する側と受け取る側の両方から参照される共有オブジェクトなので参照型にし、
+/// グリッドの大きさと歩き方しか知らず、TileGridModel からは独立している。
 /// 内部状態 (カーソルと各タイルへ流した画像) はメインアクター上でのみ触る。
 @MainActor
-final class RandomWalkTileFlipFeed {
+final class RandomWalkTileFlipFeed: TileFlipFeed {
     /// グリッド上の位置
     private struct Position {
         var row: Int

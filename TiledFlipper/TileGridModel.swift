@@ -56,10 +56,12 @@ struct Tile {
 @MainActor
 @Observable
 final class TileGridModel {
+    /// フリップ 1 回分の長さ。
+    /// 供給元が「フリップが終わるまで待つ」ためにも参照するので、型の定数にしている。
+    static let flipDuration: TimeInterval = 0.6
+
     let rows: Int
     let columns: Int
-    /// フリップ 1 回分の長さ
-    let flipDuration: TimeInterval = 0.6
 
     private(set) var tiles: [Tile]
 
@@ -88,7 +90,7 @@ final class TileGridModel {
 
         let index = flip.row * columns + flip.column
         var tile = tiles[index]
-        tile.restartFlip(to: flip.artwork, at: now, duration: flipDuration)
+        tile.restartFlip(to: flip.artwork, at: now, duration: Self.flipDuration)
         tiles[index] = tile
     }
 }

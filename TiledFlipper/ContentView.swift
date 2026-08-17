@@ -66,9 +66,13 @@ struct ContentView: View {
     private let spacing: CGFloat = 5
 
     @State private var model = TileGridModel(rows: gridRows, columns: gridColumns)
-    /// 差し替え指示の供給元。いまはランダムウォークだが、モデルとは独立しているので
-    /// 別の演出を流す供給元へ差し替えられる。
-    @State private var feed = RandomWalkTileFlipFeed(rows: gridRows, columns: gridColumns)
+    /// 差し替え指示の供給元。`TileFlipFeed` に適合する別の演出
+    /// (`RandomWalkTileFlipFeed` など) へ差し替えても、ここから下の扱いは変わらない。
+    @State private var feed: any TileFlipFeed = ClockwiseSpiralTileFlipFeed(
+        rows: gridRows,
+        columns: gridColumns,
+        flipDuration: .seconds(TileGridModel.flipDuration)
+    )
 
     var body: some View {
         GeometryReader { proxy in
@@ -108,7 +112,7 @@ struct ContentView: View {
         at now: Date,
         into context: inout GraphicsContext
     ) {
-        let appearance = tile.appearance(at: now, duration: model.flipDuration)
+        let appearance = tile.appearance(at: now, duration: TileGridModel.flipDuration)
         let width = frame.width * appearance.scale
         // 真横を向いている一瞬は描いても見えないので省く
         guard width >= 0.5 else { return }
