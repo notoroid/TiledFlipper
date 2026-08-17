@@ -11,11 +11,16 @@ import SwiftUI
 /// 選ぶ前に分かるようにしている。カード全体がタップ領域で、触れたカードの
 /// コレクションが選択される。
 struct ArtworkCollectionCardList: View {
-    let collections: [ArtworkCollection]
+    let collections: [any ArtworkCollection]
     /// プレビューの行・列数。タイルと揃えて、実際の並びに近い見た目にする。
     let previewRows: Int
     let previewColumns: Int
-    @Binding var selection: ArtworkCollection
+    /// 取得中のコレクション。取得の間は次の選択を受け付けず、そのカードに進捗を出す。
+    let fetchingCollectionID: String?
+    @Binding var selection: any ArtworkCollection
+
+    /// いずれかのコレクションを取得している最中か
+    private var isFetching: Bool { fetchingCollectionID != nil }
 
     /// プレビューの一辺の長さ
     private let previewSize: CGFloat = 108
@@ -24,7 +29,7 @@ struct ArtworkCollectionCardList: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 12) {
-                ForEach(collections) { collection in
+                ForEach(collections, id: \.id) { collection in
                     Button {
                         selection = collection
                     } label: {
@@ -32,9 +37,13 @@ struct ArtworkCollectionCardList: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(collection.displayName)
-                    .accessibilityAddTraits(collection == selection ? [.isSelected] : [])
+                    .accessibilityAddTraits(collection.id == selection.id ? [.isSelected] : [])
+                    .accessibilityValue(collection.id == fetchingCollectionID ? "Loading" : "")
                 }
             }
+            // 取得が終わるまでは次の選択を受け付けない。一覧を眺めることはできるよう、
+            // ScrollView ではなく中身のカードだけを無効化する。
+            .disabled(isFetching)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .scrollTargetLayout()
@@ -44,8 +53,9 @@ struct ArtworkCollectionCardList: View {
         .scrollIndicators(.hidden)
     }
 
-    private func card(for collection: ArtworkCollection) -> some View {
-        let isSelected = collection == selection
+    private func card(for collection: any ArtworkCollection) -> some View {
+        let isSelected = collection.id == selection.id
+        let isLoading = collection.id == fetchingCollectionID
 
         return VStack(spacing: 8) {
             ArtworkCollectionPreview(
@@ -55,12 +65,25 @@ struct ArtworkCollectionCardList: View {
             )
             .frame(width: previewSize, height: previewSize)
             .clipShape(.rect(cornerRadius: 8))
+            // 読み込み中のカードは絵柄を沈めて、代わりに進捗を見せる
+            .overlay {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .tint(.white)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.black.opacity(0.55))
+                        .clipShape(.rect(cornerRadius: 8))
+                }
+            }
 
             Text(collection.displayName)
                 .font(.caption)
                 .fontWeight(isSelected ? .semibold : .regular)
                 .lineLimit(1)
         }
+        // 選べないことが分かるよう、読み込み中は対象以外のカードを沈める
+        .opacity(!isFetching || isLoading ? 1 : 0.4)
         .padding(10)
         .glassEffect(.regular.interactive(), in: .rect(cornerRadius: cornerRadius))
         // 選択中のカードだけ縁取りを見せる
@@ -69,6 +92,8 @@ struct ArtworkCollectionCardList: View {
                 .strokeBorder(.white.opacity(isSelected ? 0.9 : 0), lineWidth: 2)
         }
         .animation(.easeInOut(duration: 0.2), value: isSelected)
+        .animation(.easeInOut(duration: 0.2), value: isLoading)
+        .animation(.easeInOut(duration: 0.2), value: isFetching)
     }
 }
 
@@ -106,12 +131,13 @@ private struct ArtworkCollectionPreview: View {
 }
 
 #Preview {
-    @Previewable @State var selection = ArtworkCatalog.defaultCollection
+    @Previewable @State var selection: any ArtworkCollection = ArtworkCatalog.defaultCollection
 
     ArtworkCollectionCardList(
         collections: ArtworkCatalog.collections,
         previewRows: 9,
         previewColumns: 9,
+        fetchingCollectionID: nil,
         selection: $selection
     )
     .frame(maxHeight: .infinity)

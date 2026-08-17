@@ -66,7 +66,7 @@ struct ContentView: View {
     private let spacing: CGFloat = 5
 
     /// 表示中のアートワークコレクション
-    @State private var selection = ArtworkCatalog.defaultCollection
+    @State private var selection: any ArtworkCollection = ArtworkCatalog.defaultCollection
     @State private var model = TileGridModel(
         rows: gridRows,
         columns: gridColumns,
@@ -74,6 +74,8 @@ struct ContentView: View {
     )
     /// カード一覧を出しているか。切り替えるとき以外は畳んでおく。
     @State private var isCollectionListVisible = false
+    /// 取得中のコレクション。終わるまで一覧では次の選択を受け付けない。
+    @State private var fetchingCollectionID: String?
 
     var body: some View {
         tiles
@@ -81,10 +83,29 @@ struct ContentView: View {
             .background(Color.black.ignoresSafeArea())
             // コレクションが変わったら、その画像でタイルを組み直して演出を流し直す。
             // 前の演出は Task のキャンセルでストリームが終わり、自然に止まる。
-            .task(id: selection) {
-                let catalog = ArtworkCatalog.catalog(for: selection)
+            .task(id: selection.id) {
+                let collection = selection
+
+                // アートワークの実体が揃うまで待つ。ネットワーク越しのコレクションでは
+                // ここでダウンロードと展開が行われるので、その間は一覧を触らせない。
+                fetchingCollectionID = collection.id
+                do {
+                    try await collection.fetch()
+                } catch {
+                    fetchingCollectionID = nil
+                    // 取得できなかったら選択をなかったことにして、表示中のものに戻す。
+                    // 表示中のコレクションの取得に失敗したときは、すでに読み込んである
+                    // 画像でそのまま続ける。
+                    if model.catalog.collection.id != collection.id {
+                        selection = model.catalog.collection
+                        return
+                    }
+                }
+                fetchingCollectionID = nil
+
+                let catalog = ArtworkCatalog.catalog(for: collection)
                 // 起動直後は @State の初期値がすでに選択中のコレクションなので作り直さない
-                if model.catalog.collection != selection {
+                if model.catalog.collection.id != collection.id {
                     model = TileGridModel(rows: gridRows, columns: gridColumns, catalog: catalog)
                 }
 
@@ -111,6 +132,7 @@ struct ContentView: View {
                     collections: ArtworkCatalog.collections,
                     previewRows: gridRows,
                     previewColumns: gridColumns,
+                    fetchingCollectionID: fetchingCollectionID,
                     selection: $selection
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
