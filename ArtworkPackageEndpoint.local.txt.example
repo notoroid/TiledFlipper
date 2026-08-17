@@ -1,0 +1,10 @@
+# オンライン配布のアートワークパッケージ (zip) の URL。
+#
+# このファイルを ArtworkPackageEndpoint.local.txt にコピーして URL を書くと、
+# ビルドフェイズ "Embed Artwork Package Endpoint" がアプリバンドルの
+# ArtworkPackageEndpoint.plist (キー: ArtworkPackageURL) に埋め込む。
+# URL 自体はリポジトリに含めないので、.local.txt は .gitignore で除外してある。
+#
+# コメント (#) と空行は無視され、最初の 1 行だけが URL として使われる。
+# ファイルが無いときはオンラインのコレクションが出ないだけで、ビルドは通る。
+https://example.com/tileflipper/Albumartworks3.zip

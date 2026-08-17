@@ -8,6 +8,11 @@ xcuserdata/
 ## Obj-C/Swift specific
 *.hmap
 
+## ローカルだけで持つ設定 (配布 URL など)。
+## ビルドフェイズが読んで Info.plist に埋め込むので、リポジトリには入れない。
+## テンプレートの *.local.*.example は含める。
+*.local.txt
+
 ## App packaging
 *.ipa
 *.dSYM.zip

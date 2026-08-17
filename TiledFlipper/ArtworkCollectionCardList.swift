@@ -56,16 +56,19 @@ struct ArtworkCollectionCardList: View {
     private func card(for collection: any ArtworkCollection) -> some View {
         let isSelected = collection.id == selection.id
         let isLoading = collection.id == fetchingCollectionID
+        let catalog = ArtworkCatalog.catalog(for: collection)
 
         return VStack(spacing: 8) {
             ArtworkCollectionPreview(
-                catalog: ArtworkCatalog.catalog(for: collection),
+                catalog: catalog,
                 rows: previewRows,
                 columns: previewColumns
             )
             .frame(width: previewSize, height: previewSize)
             .clipShape(.rect(cornerRadius: 8))
-            // 読み込み中のカードは絵柄を沈めて、代わりに進捗を見せる
+            // 読み込み中のカードは絵柄を沈めて、代わりに進捗を見せる。
+            // まだ手元に無いオンラインのコレクションは、絵柄の代わりに
+            // ダウンロードで手に入ることを示す。
             .overlay {
                 if isLoading {
                     ProgressView()
@@ -73,6 +76,13 @@ struct ArtworkCollectionCardList: View {
                         .tint(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.black.opacity(0.55))
+                        .clipShape(.rect(cornerRadius: 8))
+                } else if catalog.names.isEmpty {
+                    Image(systemName: "arrow.down.circle")
+                        .font(.title)
+                        .foregroundStyle(.white.opacity(0.7))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(white: 0.12))
                         .clipShape(.rect(cornerRadius: 8))
                 }
             }
@@ -134,7 +144,7 @@ private struct ArtworkCollectionPreview: View {
     @Previewable @State var selection: any ArtworkCollection = ArtworkCatalog.defaultCollection
 
     ArtworkCollectionCardList(
-        collections: ArtworkCatalog.collections,
+        collections: ArtworkCatalog.bundledCollections,
         previewRows: 9,
         previewColumns: 9,
         fetchingCollectionID: nil,

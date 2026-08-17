@@ -96,6 +96,7 @@
 				17E14F0B3031FB830036D130 /* Sources */,
 				17E14F0C3031FB830036D130 /* Frameworks */,
 				17E14F0D3031FB830036D130 /* Resources */,
+						17E14FA03031FB840036D130 /* Embed Artwork Package Endpoint */,
 			);
 			buildRules = (
 			);
@@ -210,6 +211,30 @@
 			);
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17E14FA03031FB840036D130 /* Embed Artwork Package Endpoint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ArtworkPackageEndpoint.local.txt",
+			);
+			name = "Embed Artwork Package Endpoint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ArtworkPackageEndpoint.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Albumartworks の配布 URL はリポジトリに置かない。\n# ${SRCROOT}/ArtworkPackageEndpoint.local.txt (git 管理外) から読んで、\n# アプリバンドルの ArtworkPackageEndpoint.plist に埋め込む。\nset -euo pipefail\n\nENDPOINT_FILE=\"${SRCROOT}/ArtworkPackageEndpoint.local.txt\"\nOUTPUT_PLIST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ArtworkPackageEndpoint.plist\"\n\nENDPOINT=\"\"\nif [ -f \"${ENDPOINT_FILE}\" ]; then\n    # コメント (#) と空行を飛ばして、最初の 1 行だけを URL として使う。\n    ENDPOINT=$(grep -v -e '^[[:space:]]*#' -e '^[[:space:]]*$' \"${ENDPOINT_FILE}\" | head -n 1 | tr -d '[:space:]' || true)\nfi\n\nif [ -z \"${ENDPOINT}\" ]; then\n    echo \"warning: ${ENDPOINT_FILE} に配布 URL がありません (オンラインのコレクションは出ません)\"\nfi\n\n# URL が無いときも空の plist を作る。declared output なので必ず要る。\nmkdir -p \"$(dirname \"${OUTPUT_PLIST}\")\"\nrm -f \"${OUTPUT_PLIST}\"\n/usr/libexec/PlistBuddy -c \"Add :ArtworkPackageURL string ${ENDPOINT}\" -c \"Save\" \"${OUTPUT_PLIST}\" > /dev/null\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		17E14F0B3031FB830036D130 /* Sources */ = {

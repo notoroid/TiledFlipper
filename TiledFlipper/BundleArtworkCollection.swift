@@ -38,25 +38,35 @@ struct BundleArtworkCollection: ArtworkCollection, Hashable {
             return []
         }
 
-        // artwork には "001.png" と "Foo.files/001.png" のようにフォルダ付きで
-        // 書かれているものが混ざる。バンドル内での探し方は同じなので、
-        // ファイル名だけに揃えてから扱う。
+        // artwork は "Albumartworks.files/001.png" のようにフォルダ付きで書かれている。
+        // フォルダ違いで同じファイル名のものを取り違えないよう、パスのまま名前に使う。
         // 同じアートワークが複数エントリにあっても 1 件として扱う。
         var seen = Set<String>()
         return entries
-            .map { URL(fileURLWithPath: $0.artwork).lastPathComponent }
+            .map(\.artwork)
             .filter { seen.insert($0).inserted }
     }
 
     func loadImage(named name: String) -> UIImage? {
         // 画像はアセットカタログではなくバンドル内の PNG なので、ファイル名 (拡張子込み) で
-        // URL を引いて読み込む。コレクション間でファイル名が重なっても取り違えないよう、
-        // まず自分のフォルダの中を探し、見つからなければバンドル直下を探す。
-        let url = Bundle.main.url(
-            forResource: name,
+        // URL を引いて読み込む。
+        //
+        // JSON のフォルダがそのままバンドル内の位置になるとは限らない。グループとして
+        // 追加した画像はバンドル直下に平たく置かれるため。そこで
+        // JSON のフォルダ → コレクションのフォルダ → バンドル直下 の順に探す。
+        let components = name.split(separator: "/")
+        let fileName = String(components.last ?? "")
+        let directory = components.dropLast().joined(separator: "/")
+
+        let url = (directory.isEmpty ? nil : Bundle.main.url(
+            forResource: fileName,
+            withExtension: nil,
+            subdirectory: directory
+        )) ?? Bundle.main.url(
+            forResource: fileName,
             withExtension: nil,
             subdirectory: "\(resourceName).files"
-        ) ?? Bundle.main.url(forResource: name, withExtension: nil)
+        ) ?? Bundle.main.url(forResource: fileName, withExtension: nil)
 
         guard let url else { return nil }
         return UIImage(contentsOfFile: url.path)

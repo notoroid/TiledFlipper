@@ -67,6 +67,8 @@ struct ContentView: View {
 
     /// 表示中のアートワークコレクション
     @State private var selection: any ArtworkCollection = ArtworkCatalog.defaultCollection
+    /// 選べるコレクション。オンラインのものは一覧が取れ次第あとから足す。
+    @State private var collections: [any ArtworkCollection] = ArtworkCatalog.bundledCollections
     @State private var model = TileGridModel(
         rows: gridRows,
         columns: gridColumns,
@@ -81,6 +83,11 @@ struct ContentView: View {
         tiles
             .overlay(alignment: .bottomTrailing) { collectionSwitcher }
             .background(Color.black.ignoresSafeArea())
+            // オンラインで配られているコレクションを一覧に足す。
+            // アートワークの実体は選ばれたときに落とすので、ここでは名前だけ。
+            .task {
+                collections = ArtworkCatalog.bundledCollections + (await ArtworkCatalog.onlineCollections())
+            }
             // コレクションが変わったら、その画像でタイルを組み直して演出を流し直す。
             // 前の演出は Task のキャンセルでストリームが終わり、自然に止まる。
             .task(id: selection.id) {
@@ -129,7 +136,7 @@ struct ContentView: View {
         VStack(alignment: .trailing, spacing: 12) {
             if isCollectionListVisible {
                 ArtworkCollectionCardList(
-                    collections: ArtworkCatalog.collections,
+                    collections: collections,
                     previewRows: gridRows,
                     previewColumns: gridColumns,
                     fetchingCollectionID: fetchingCollectionID,
