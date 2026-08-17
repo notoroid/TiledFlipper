@@ -23,7 +23,13 @@ struct Tile {
         guard let flipStart else { return (artwork, 1) }
 
         let progress = now.timeIntervalSince(flipStart) / duration
-        guard progress > 0, progress < 1 else { return (artwork, 1) }
+
+        // 開始時刻は指示を反映した瞬間の時刻、描画時刻は TimelineView が渡すフレームの
+        // 時刻なので、描画時刻の方がわずかに過去 (progress < 0) になることがある。
+        // ここで新しいアートワークを返すと、回り始める前に変更後の画像が一瞬見えて
+        // ちらつくため、まだ始まっていない間は前のアートワークで正面を向かせておく。
+        guard progress > 0 else { return (previousArtwork, 1) }
+        guard progress < 1 else { return (artwork, 1) }
 
         // 板が 180 度回るので、幅は 1 → 0 → 1 と変化する。
         // 真横を向いて幅が 0 になる中間点で、画像を新しいものへ切り替える。
