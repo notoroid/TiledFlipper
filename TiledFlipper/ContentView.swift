@@ -121,7 +121,7 @@ struct ContentView: View {
                 let feed = RandomizedTileFlipFeed(
                     rows: gridRows,
                     columns: gridColumns,
-                    catalog: catalog,
+                    artworkCount: catalog.artworkCount,
                     flipDuration: .seconds(TileGridModel.flipDuration)
                 )
                 await model.apply(feed.flips())

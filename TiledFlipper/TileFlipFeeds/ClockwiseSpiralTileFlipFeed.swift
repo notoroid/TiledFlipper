@@ -28,8 +28,8 @@ final class ClockwiseSpiralTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
-    /// 差し替え先のアートワークを選ぶ元になるコレクション
-    let catalog: ArtworkCatalog
+    /// 差し替え先に選べるアートワークの数
+    let artworkCount: Int
     /// 次のマスへ進むまでの間隔。
     /// フリップ 1 回分より短くすることで、フリップが完了する前に次が始まり、
     /// 起点から順に連鎖しているように見える。
@@ -45,18 +45,18 @@ final class ClockwiseSpiralTileFlipFeed: TileFlipFeed {
 
     /// 各タイルへ最後に流したアートワーク。
     /// 同じ画像への差し替えを避け、変化が必ず見えるようにするために覚えておく。
-    private var lastArtworks: [String?]
+    private var lastArtworks: [Int?]
 
     init(
         rows: Int,
         columns: Int,
-        catalog: ArtworkCatalog,
+        artworkCount: Int,
         stepInterval: Duration = .milliseconds(90),
         flipDuration: Duration = .milliseconds(600)
     ) {
         self.rows = rows
         self.columns = columns
-        self.catalog = catalog
+        self.artworkCount = artworkCount
         self.stepInterval = stepInterval
         self.flipDuration = flipDuration
         self.paths = Corner.allCases.map { Self.makePath(rows: rows, columns: columns, from: $0) }
@@ -101,7 +101,7 @@ final class ClockwiseSpiralTileFlipFeed: TileFlipFeed {
     /// 指定したマスへの差し替え指示を作る。
     private func nextFlip(at position: Position) -> TileFlip? {
         let index = position.row * columns + position.column
-        guard let artwork = catalog.randomName(excluding: lastArtworks[index]) else {
+        guard let artwork = randomArtwork(excluding: lastArtworks[index]) else {
             return nil
         }
         lastArtworks[index] = artwork

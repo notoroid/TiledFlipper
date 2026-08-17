@@ -94,12 +94,16 @@ final class TileGridModel {
 
     /// 差し替え指示を 1 件反映する。
     /// すでにフリップ中のタイルなら、それを中断して新しいフリップに差し替える。
+    ///
+    /// 指示は番号でアートワークを指すので、描画で使う名前への読み替えはここで行う。
+    /// 供給元はアートワークの置き場所やファイル名を知らないままでいられる。
     func apply(_ flip: TileFlip, at now: Date = .now) {
         guard (0..<rows).contains(flip.row), (0..<columns).contains(flip.column) else { return }
+        guard let artwork = catalog.name(at: flip.artwork) else { return }
 
         let index = flip.row * columns + flip.column
         var tile = tiles[index]
-        tile.restartFlip(to: flip.artwork, at: now, duration: Self.flipDuration)
+        tile.restartFlip(to: artwork, at: now, duration: Self.flipDuration)
         tiles[index] = tile
     }
 }

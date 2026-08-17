@@ -75,14 +75,21 @@ final class ArtworkCatalog {
         self.names = listed.filter { images[$0] != nil }
     }
 
+    /// 差し替え先に選べるアートワークの数。
+    /// 供給元へ渡し、`TileFlip.artwork` が取る番号の上限になる。
+    var artworkCount: Int {
+        names.count
+    }
+
     func image(named name: String) -> Image? {
         images[name]
     }
 
-    /// ランダムなアートワークを 1 つ返す。
-    /// 差し替わったことが分かるよう、指定したものは候補から外す。
-    func randomName(excluding excluded: String?) -> String? {
-        let candidates = names.filter { $0 != excluded }
-        return candidates.randomElement() ?? names.randomElement()
+    /// 番号に対応するアートワークの名前。
+    ///
+    /// 供給元は番号でしか差し替え先を指さないので、その読み替えをここで受け持つ。
+    /// 範囲外の番号には nil を返す。
+    func name(at index: Int) -> String? {
+        names.indices.contains(index) ? names[index] : nil
     }
 }

@@ -20,8 +20,8 @@ final class FallingColumnTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
-    /// 差し替え先のアートワークを選ぶ元になるコレクション
-    let catalog: ArtworkCatalog
+    /// 差し替え先に選べるアートワークの数
+    let artworkCount: Int
     /// 1 行下へ進むまでの間隔。
     /// フリップ 1 回分より短くすることで、フリップが完了する前に次の行が始まり、
     /// 上から下へ流れ落ちているように見える。
@@ -41,7 +41,7 @@ final class FallingColumnTileFlipFeed: TileFlipFeed {
 
     /// 各タイルへ最後に流したアートワーク。
     /// 同じ画像への差し替えを避け、変化が必ず見えるようにするために覚えておく。
-    private var lastArtworks: [String?]
+    private var lastArtworks: [Int?]
 
     /// 前の列を落とし始めてから進んだ行数。
     private var rowsSinceLaunch: Int
@@ -49,13 +49,13 @@ final class FallingColumnTileFlipFeed: TileFlipFeed {
     init(
         rows: Int,
         columns: Int,
-        catalog: ArtworkCatalog,
+        artworkCount: Int,
         stepInterval: Duration = .milliseconds(90),
         columnsPerDrop: Int = 3
     ) {
         self.rows = rows
         self.columns = columns
-        self.catalog = catalog
+        self.artworkCount = artworkCount
         self.stepInterval = stepInterval
         self.columnsPerDrop = max(1, columnsPerDrop)
         self.concurrentDrops = max(1, columns / max(1, columnsPerDrop))
@@ -126,7 +126,7 @@ final class FallingColumnTileFlipFeed: TileFlipFeed {
     /// 指定したマスへの差し替え指示を作る。
     private func nextFlip(row: Int, column: Int) -> TileFlip? {
         let index = row * columns + column
-        guard let artwork = catalog.randomName(excluding: lastArtworks[index]) else {
+        guard let artwork = randomArtwork(excluding: lastArtworks[index]) else {
             return nil
         }
         lastArtworks[index] = artwork

@@ -35,3 +35,4 @@ protocol ArtworkCollection: Sendable {
     /// 名前に対応するアートワーク画像。見つからなければ nil を返す。
     func loadImage(named name: String) -> UIImage?
 }
+

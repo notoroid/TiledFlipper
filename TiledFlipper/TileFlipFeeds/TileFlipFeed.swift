@@ -12,7 +12,12 @@ import Foundation
 struct TileFlip: Sendable {
     var row: Int
     var column: Int
-    var artwork: String
+    /// 差し替え先のアートワークを指す番号。`0..<TileFlipFeed.artworkCount` の範囲。
+    ///
+    /// ファイル名ではなく番号で渡すことで、指示を作る側はアートワークが
+    /// どこに何という名前で置かれているかを知らずに済む。名前への読み替えは
+    /// 受け取る側 (TileGridModel) が担当する。
+    var artwork: Int
 }
 
 /// 差し替え指示をタイルへ流し込む供給元。
@@ -28,10 +33,28 @@ protocol TileFlipFeed: AnyObject {
     var rows: Int { get }
     var columns: Int { get }
 
+    /// 差し替え先に選べるアートワークの数。
+    /// 流す `TileFlip.artwork` は `0..<artworkCount` に収まっていること。
+    var artworkCount: Int { get }
+
     /// 差し替え指示を流すストリームを作る。
     ///
     /// 受け取り側が読むのをやめたら、生成側も止まること。
     func flips() -> AsyncStream<TileFlip>
+}
+
+extension TileFlipFeed {
+    /// 差し替え先のアートワークを 1 つランダムに選ぶ。
+    /// 差し替わったことが分かるよう、指定した番号は候補から外す。
+    ///
+    /// 選べるアートワークが 1 つも無ければ nil を返す。
+    func randomArtwork(excluding excluded: Int?) -> Int? {
+        guard artworkCount > 0 else { return nil }
+
+        // アートワークが 1 つしか無いときは避けようがないので、それをそのまま使う
+        let candidates = (0..<artworkCount).filter { $0 != excluded }
+        return candidates.randomElement() ?? (0..<artworkCount).randomElement()
+    }
 }
 
 /// ランダムウォークで選んだタイルへの差し替え指示を流し続ける供給元。
@@ -48,8 +71,8 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
-    /// 差し替え先のアートワークを選ぶ元になるコレクション
-    let catalog: ArtworkCatalog
+    /// 差し替え先に選べるアートワークの数
+    let artworkCount: Int
     /// 選択が次のタイルへ移るまでの間隔。
     /// TileGridModel のフリップ 1 回分より短くすることで、フリップが完了する前に
     /// 次が始まり、連鎖しているように見える。
@@ -58,17 +81,17 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
     private var cursor: Position
     /// 各タイルへ最後に流したアートワーク。
     /// 同じ画像への差し替えを避け、変化が必ず見えるようにするために覚えておく。
-    private var lastArtworks: [String?]
+    private var lastArtworks: [Int?]
 
     init(
         rows: Int,
         columns: Int,
-        catalog: ArtworkCatalog,
+        artworkCount: Int,
         stepInterval: Duration = .milliseconds(90)
     ) {
         self.rows = rows
         self.columns = columns
-        self.catalog = catalog
+        self.artworkCount = artworkCount
         self.stepInterval = stepInterval
         self.cursor = Position(
             row: Int.random(in: 0..<rows),
@@ -104,7 +127,7 @@ final class RandomWalkTileFlipFeed: TileFlipFeed {
         }
 
         let index = position.row * columns + position.column
-        guard let artwork = catalog.randomName(excluding: lastArtworks[index]) else {
+        guard let artwork = randomArtwork(excluding: lastArtworks[index]) else {
             return nil
         }
         lastArtworks[index] = artwork

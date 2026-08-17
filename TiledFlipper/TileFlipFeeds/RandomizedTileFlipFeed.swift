@@ -25,8 +25,8 @@ final class RandomizedTileFlipFeed: TileFlipFeed {
 
     let rows: Int
     let columns: Int
-    /// 差し替え先のアートワークを選ぶ元になるコレクション。作る演出にそのまま渡す。
-    let catalog: ArtworkCatalog
+    /// 差し替え先に選べるアートワークの数。作る演出にそのまま渡す。
+    let artworkCount: Int
     /// 1 つの演出が流す枚数。既定はグリッド 1 面ぶん。
     let flipsPerTurn: Int
     /// 残り何枚になったら次の演出を始めるか。この枚数だけ 2 つの演出が重なる。
@@ -40,14 +40,14 @@ final class RandomizedTileFlipFeed: TileFlipFeed {
     init(
         rows: Int,
         columns: Int,
-        catalog: ArtworkCatalog,
+        artworkCount: Int,
         flipsPerTurn: Int? = nil,
         handoverFlips: Int = 6,
         flipDuration: Duration = .milliseconds(600)
     ) {
         self.rows = rows
         self.columns = columns
-        self.catalog = catalog
+        self.artworkCount = artworkCount
         self.flipDuration = flipDuration
 
         let perTurn = max(1, flipsPerTurn ?? (rows * columns))
@@ -123,18 +123,18 @@ final class RandomizedTileFlipFeed: TileFlipFeed {
     private func makeFeed(_ kind: Kind) -> any TileFlipFeed {
         switch kind {
         case .randomWalk:
-            RandomWalkTileFlipFeed(rows: rows, columns: columns, catalog: catalog)
+            RandomWalkTileFlipFeed(rows: rows, columns: columns, artworkCount: artworkCount)
         case .clockwiseSpiral:
             ClockwiseSpiralTileFlipFeed(
                 rows: rows,
                 columns: columns,
-                catalog: catalog,
+                artworkCount: artworkCount,
                 flipDuration: flipDuration
             )
         case .fallingColumn:
-            FallingColumnTileFlipFeed(rows: rows, columns: columns, catalog: catalog)
+            FallingColumnTileFlipFeed(rows: rows, columns: columns, artworkCount: artworkCount)
         case .zigzag:
-            ZigzagTileFlipFeed(rows: rows, columns: columns, catalog: catalog)
+            ZigzagTileFlipFeed(rows: rows, columns: columns, artworkCount: artworkCount)
         }
     }
 }
