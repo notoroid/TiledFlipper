@@ -1,0 +1,409 @@
+openapi: 3.2.0
+info:
+  title: TiledFlipper TileFlip API
+  version: 1.0.0
+  summary: タイルの差し替え指示とアートワーク配布情報を配る gRPC サービス。
+  description: |
+    TiledFlipper アプリのうち、ネットワーク越しに取りに行く部分を gRPC として書き出したもの。
+
+    - 転送は gRPC (HTTP/2)、メッセージのフォーマットは Protocol Buffers (`application/grpc+proto`)。
+    - proto の定義はこの文書の `components.schemas` に対応する。`x-protobuf-*` 拡張が
+      proto 側の package / message / field 番号を持っている。
+    - 実装元は `TiledFlipper/NetworkArtworkCollection.swift` (アートワーク配布情報) と
+      `TiledFlipper/TileFlipFeeds/*.swift` (差し替え指示)。
+  license:
+    name: See LICENSE in the repository
+x-protobuf-package: tiledflipper.v1
+x-grpc-service: tiledflipper.v1.TileFlipService
+
+servers:
+  - url: https://{host}
+    description: |
+      配布先のホスト。リポジトリには実体を置かず、`TiledFlipperEndpoint.local.txt` から
+      ビルドフェイズ "Embed Artwork Package Endpoint" が plist へ埋め込む。
+    variables:
+      host:
+        default: tileflip.example.invalid
+        description: ビルド時に注入される配布先ホスト。
+
+tags:
+  - name: TileFlipService
+    description: タイルの差し替えとアートワーク配布をまとめた 1 つの gRPC サービス。
+
+paths:
+  /tiledflipper.v1.TileFlipService/GetDescriptions:
+    post:
+      tags: [TileFlipService]
+      operationId: TileFlipService_GetDescriptions
+      summary: 配られているアートワークコレクションの一覧を返す。
+      description: |
+        アートワークの実体 (zip) はここでは返さない。返すのは「どこに何があるか」だけで、
+        コレクションが選ばれたときにクライアントが `NetworkArtworkDescription.url` から取りに行く。
+
+        一覧が空でもエラーではない。クライアントは同梱ぶんだけで動く。
+
+        実装元: `TileFlipServcice.getDescriptions() async throws -> [NetworkArtworkDescription]`
+        (Swift 側のクラス名は `TileFlipServcice` と綴られているが、API 名は
+        `TileFlipService` に揃えている)
+      x-grpc-method: GetDescriptions
+      x-grpc-streaming: NONE
+      requestBody:
+        required: true
+        content:
+          application/grpc+proto:
+            schema:
+              $ref: '#/components/schemas/GetDescriptionsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDescriptionsResponse'
+        default:
+          $ref: '#/components/responses/GrpcError'
+
+  /tiledflipper.v1.TileFlipService/Flips:
+    post:
+      tags: [TileFlipService]
+      operationId: TileFlipService_Flips
+      summary: タイルの差し替え指示を流し続けるストリームを開く。
+      description: |
+        server streaming。1 メッセージが `TileFlip` 1 件 (「どの位置を」「どの画像に」) で、
+        サーバーは演出に従って `step_interval` ごとに 1 件ずつ流す。終端は無く、
+        クライアントが読むのをやめる (ストリームをキャンセルする) と生成側も止まる。
+
+        フリップの長さや進行度といった見た目はクライアント (TileGridModel) の担当なので、
+        メッセージには含めない。差し替え先は名前ではなく `0..<artwork_count` の番号で指す。
+
+        実装元: `TileFlipFeed.flips() -> AsyncStream<TileFlip>`
+      x-grpc-method: Flips
+      x-grpc-streaming: SERVER_STREAMING
+      requestBody:
+        required: true
+        content:
+          application/grpc+proto:
+            schema:
+              $ref: '#/components/schemas/FlipsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/FlipStream'
+        default:
+          $ref: '#/components/responses/GrpcError'
+
+components:
+  responses:
+    GetDescriptionsResponse:
+      description: |
+        一覧を 1 メッセージで返す。gRPC では正常終了もエラーも HTTP 200 で、
+        結果は trailer の `grpc-status` に入る。
+      headers:
+        grpc-status:
+          $ref: '#/components/headers/GrpcStatus'
+        grpc-message:
+          $ref: '#/components/headers/GrpcMessage'
+      content:
+        application/grpc+proto:
+          schema:
+            $ref: '#/components/schemas/GetDescriptionsResponse'
+
+    FlipStream:
+      description: |
+        `TileFlip` を 1 件ずつ流し続けるストリーム。`itemSchema` がストリーム上の
+        1 メッセージを表す。長さ前置きの gRPC メッセージフレームが 1 件ずつ届く。
+      headers:
+        grpc-status:
+          $ref: '#/components/headers/GrpcStatus'
+        grpc-message:
+          $ref: '#/components/headers/GrpcMessage'
+      content:
+        application/grpc+proto:
+          itemSchema:
+            $ref: '#/components/schemas/TileFlip'
+
+    GrpcError:
+      description: |
+        エラー。HTTP のステータスではなく trailer の `grpc-status` (0 以外) で表す。
+        本文として `google.rpc.Status` が付くことがある。
+      headers:
+        grpc-status:
+          $ref: '#/components/headers/GrpcStatus'
+        grpc-message:
+          $ref: '#/components/headers/GrpcMessage'
+      content:
+        application/grpc+proto:
+          schema:
+            $ref: '#/components/schemas/Status'
+
+  headers:
+    GrpcStatus:
+      description: gRPC のステータスコード。0 が正常。
+      required: true
+      schema:
+        type: string
+        examples: ['0']
+    GrpcMessage:
+      description: エラーのときの説明。正常時は付かない。
+      required: false
+      schema:
+        type: string
+
+  schemas:
+    GetDescriptionsRequest:
+      type: object
+      title: GetDescriptionsRequest
+      description: 引数は無い。将来足せるよう message として定義しておく。
+      x-protobuf-message: tiledflipper.v1.GetDescriptionsRequest
+      additionalProperties: false
+
+    GetDescriptionsResponse:
+      type: object
+      title: GetDescriptionsResponse
+      x-protobuf-message: tiledflipper.v1.GetDescriptionsResponse
+      properties:
+        descriptions:
+          type: array
+          description: |
+            配られているコレクション。空のこともある (配布先が無いビルドや、まだ何も置いていないとき)。
+          x-protobuf-field-number: 1
+          x-protobuf-type: repeated tiledflipper.v1.NetworkArtworkDescription
+          items:
+            $ref: '#/components/schemas/NetworkArtworkDescription'
+      additionalProperties: false
+
+    NetworkArtworkDescription:
+      type: object
+      title: NetworkArtworkDescription
+      description: |
+        1 つのアートワークコレクションの在り処。実体は zip で配られていて、
+        クライアントは `url` から落として展開し、`artwork_list_file` に書かれた
+        一覧 (JSON) を読んで画像を引く。
+
+        実装元: `struct NetworkArtworkDescription`
+      x-protobuf-message: tiledflipper.v1.NetworkArtworkDescription
+      required: [url, name, revision, unique_identifier, artwork_list_file]
+      properties:
+        url:
+          type: string
+          format: uri
+          description: zip の配布先。
+          x-protobuf-field-number: 1
+          x-protobuf-type: string
+          examples: ['https://tileflip.example.invalid/packages/Albumartworks3.zip']
+        name:
+          type: string
+          description: 選択画面に出す表示名。
+          x-protobuf-field-number: 2
+          x-protobuf-type: string
+          examples: ['Online artwork']
+        revision:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 中身の版。上がったら落とし直す。
+          x-protobuf-field-number: 3
+          x-protobuf-type: int32
+          examples: [3]
+        unique_identifier:
+          type: string
+          description: |
+            コレクションを一意に指す文字列。展開先ディレクトリの名前にも使うので、
+            同じ中身なら常に同じ値であること。
+          x-protobuf-field-number: 4
+          x-protobuf-type: string
+          examples: ['64dbd45b0eb7e01bb78db792c570a036dcdf49ef']
+        artwork_list_file:
+          type: string
+          description: |
+            zip を展開したルートから見た、アートワーク一覧 JSON の相対パス。
+            JSON の各要素は `artwork` (ルートからの相対パス) を持つ。
+          x-protobuf-field-number: 5
+          x-protobuf-type: string
+          examples: ['Albumartworks3.json']
+      additionalProperties: false
+
+    FlipsRequest:
+      type: object
+      title: FlipsRequest
+      description: |
+        どのグリッドへ、どの演出で流すか。`TileFlipFeed` の init 引数に対応する。
+      x-protobuf-message: tiledflipper.v1.FlipsRequest
+      required: [rows, columns, artwork_count]
+      properties:
+        rows:
+          type: integer
+          format: int32
+          minimum: 0
+          description: グリッドの行数。受け取る側と揃っている必要がある。
+          x-protobuf-field-number: 1
+          x-protobuf-type: int32
+          examples: [12]
+        columns:
+          type: integer
+          format: int32
+          minimum: 0
+          description: グリッドの列数。
+          x-protobuf-field-number: 2
+          x-protobuf-type: int32
+          examples: [8]
+        artwork_count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: |
+            差し替え先に選べるアートワークの数。流れてくる `TileFlip.artwork` は
+            `0..<artwork_count` に収まる。0 のときはストリームがすぐ終わる。
+          x-protobuf-field-number: 3
+          x-protobuf-type: int32
+          examples: [100]
+        feed_kind:
+          allOf:
+            - $ref: '#/components/schemas/FeedKind'
+          description: 流し方。未指定は `FEED_KIND_RANDOMIZED` と同じ扱い。
+          x-protobuf-field-number: 4
+          x-protobuf-type: tiledflipper.v1.FeedKind
+        step_interval:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+          description: |
+            次のマスへ進むまでの間隔。クライアントのフリップ 1 回分より短くすると、
+            フリップが終わる前に次が始まり、連鎖して見える。既定は 90ms。
+          x-protobuf-field-number: 5
+          x-protobuf-type: google.protobuf.Duration
+        flip_duration:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+          description: |
+            クライアントでのフリップ 1 回分の長さ。`FEED_KIND_CLOCKWISE_SPIRAL` が
+            周の進み方を決めるのに使う。既定は 600ms。
+          x-protobuf-field-number: 6
+          x-protobuf-type: google.protobuf.Duration
+        flips_per_turn:
+          type: integer
+          format: int32
+          minimum: 1
+          description: |
+            `FEED_KIND_RANDOMIZED` のみ。1 つの演出が流す枚数。
+            未指定はグリッド 1 面ぶん (`rows * columns`)。
+          x-protobuf-field-number: 7
+          x-protobuf-type: optional int32
+        handover_flips:
+          type: integer
+          format: int32
+          minimum: 0
+          description: |
+            `FEED_KIND_RANDOMIZED` のみ。残り何枚で次の演出を始めるか。
+            この枚数だけ 2 つの演出が重なる。既定は 6。
+          x-protobuf-field-number: 8
+          x-protobuf-type: optional int32
+        columns_per_drop:
+          type: integer
+          format: int32
+          minimum: 1
+          description: |
+            `FEED_KIND_FALLING_COLUMN` のみ。何カラムあたり 1 本を落とすか。既定は 3。
+          x-protobuf-field-number: 9
+          x-protobuf-type: optional int32
+      additionalProperties: false
+
+    FeedKind:
+      type: string
+      title: FeedKind
+      description: 差し替え指示の流し方。`TileFlipFeed` の実装に対応する。
+      x-protobuf-enum: tiledflipper.v1.FeedKind
+      oneOf:
+        - const: FEED_KIND_UNSPECIFIED
+          title: 未指定
+          description: 既定 (`FEED_KIND_RANDOMIZED`) として扱う。
+          x-protobuf-enum-value: 0
+        - const: FEED_KIND_RANDOM_WALK
+          title: RandomWalkTileFlipFeed
+          description: ランダムウォークで選んだタイルへ流す。
+          x-protobuf-enum-value: 1
+        - const: FEED_KIND_CLOCKWISE_SPIRAL
+          title: ClockwiseSpiralTileFlipFeed
+          description: 隅から中心へ時計回りに巻き込むように流す。
+          x-protobuf-enum-value: 2
+        - const: FEED_KIND_FALLING_COLUMN
+          title: FallingColumnTileFlipFeed
+          description: 列を上から下へ落としていく。
+          x-protobuf-enum-value: 3
+        - const: FEED_KIND_ZIGZAG
+          title: ZigzagTileFlipFeed
+          description: 折り返しながら尾を引くように流す。
+          x-protobuf-enum-value: 4
+        - const: FEED_KIND_RANDOMIZED
+          title: RandomizedTileFlipFeed
+          description: 上の演出をランダムに切り替えながら流し続ける。
+          x-protobuf-enum-value: 5
+
+    TileFlip:
+      type: object
+      title: TileFlip
+      description: |
+        タイル 1 枚を別のアートワークへ差し替える指示。ストリームの 1 メッセージ。
+
+        「どの位置を」「どの画像に」だけを持つ。実装元: `struct TileFlip`
+      x-protobuf-message: tiledflipper.v1.TileFlip
+      required: [row, column, artwork]
+      properties:
+        row:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 差し替えるタイルの行。`0..<FlipsRequest.rows`。
+          x-protobuf-field-number: 1
+          x-protobuf-type: int32
+          examples: [4]
+        column:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 差し替えるタイルの列。`0..<FlipsRequest.columns`。
+          x-protobuf-field-number: 2
+          x-protobuf-type: int32
+          examples: [7]
+        artwork:
+          type: integer
+          format: int32
+          minimum: 0
+          description: |
+            差し替え先のアートワークを指す番号。`0..<FlipsRequest.artwork_count`。
+            ファイル名ではなく番号で渡すので、送る側はアートワークがどこに何という
+            名前で置かれているかを知らずに済む。名前への読み替えは受け取る側の担当。
+          x-protobuf-field-number: 3
+          x-protobuf-type: int32
+          examples: [42]
+      additionalProperties: false
+
+    Duration:
+      type: string
+      title: Duration
+      description: |
+        `google.protobuf.Duration`。JSON 表現では秒を小数で書き、末尾に "s" を付ける。
+      x-protobuf-message: google.protobuf.Duration
+      pattern: '^-?\d+(\.\d{1,9})?s$'
+      examples: ['0.090s', '0.600s']
+
+    Status:
+      type: object
+      title: Status
+      description: '`google.rpc.Status`。gRPC のエラー詳細。'
+      x-protobuf-message: google.rpc.Status
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: gRPC のステータスコード。
+          x-protobuf-field-number: 1
+          x-protobuf-type: int32
+        message:
+          type: string
+          description: 開発者向けの説明。
+          x-protobuf-field-number: 2
+          x-protobuf-type: string
+        details:
+          type: array
+          description: 付随する詳細 (`google.protobuf.Any`)。
+          x-protobuf-field-number: 3
+          x-protobuf-type: repeated google.protobuf.Any
+          items:
+            type: object
+            additionalProperties: true
+      additionalProperties: false

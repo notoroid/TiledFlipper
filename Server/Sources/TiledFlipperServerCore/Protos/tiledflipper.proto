@@ -1,0 +1,106 @@
+// tiledflipper.proto
+//
+// TiledFlipper がネットワーク越しに取りに行く部分の定義。
+// リポジトリルートの `openapi.yaml` (components.schemas と x-protobuf-* 拡張) の写しなので、
+// 片方を変えたらもう片方も直すこと。
+
+syntax = "proto3";
+
+package tiledflipper.v1;
+
+import "google/protobuf/duration.proto";
+
+// タイルの差し替えとアートワーク配布をまとめた 1 つのサービス。
+service TileFlipService {
+  // 配られているアートワークコレクションの一覧を返す。
+  //
+  // アートワークの実体 (zip) は返さない。返すのは「どこに何があるか」だけで、
+  // コレクションが選ばれたときにクライアントが url から取りに行く。
+  // 一覧が空でもエラーではない。クライアントは同梱ぶんだけで動く。
+  rpc GetDescriptions(GetDescriptionsRequest) returns (GetDescriptionsResponse);
+
+  // タイルの差し替え指示を流し続けるストリームを開く。
+  //
+  // 1 メッセージが TileFlip 1 件 (「どの位置を」「どの画像に」) で、
+  // サーバーは step_interval ごとに 1 件ずつ流す。終端は無く、
+  // クライアントが読むのをやめる (ストリームをキャンセルする) と生成側も止まる。
+  rpc Flips(FlipsRequest) returns (stream TileFlip);
+}
+
+// 引数は無い。将来足せるよう message として定義しておく。
+message GetDescriptionsRequest {}
+
+message GetDescriptionsResponse {
+  // 配られているコレクション。空のこともある
+  // (配布先が無いビルドや、まだ何も置いていないとき)。
+  repeated NetworkArtworkDescription descriptions = 1;
+}
+
+// 1 つのアートワークコレクションの在り処。実体は zip で配られていて、
+// クライアントは url から落として展開し、artwork_list_file に書かれた
+// 一覧 (JSON) を読んで画像を引く。
+message NetworkArtworkDescription {
+  // zip の配布先。
+  string url = 1;
+  // 選択画面に出す表示名。
+  string name = 2;
+  // 中身の版。上がったら落とし直す。
+  int32 revision = 3;
+  // コレクションを一意に指す文字列。展開先ディレクトリの名前にも使うので、
+  // 同じ中身なら常に同じ値であること。
+  string unique_identifier = 4;
+  // zip を展開したルートから見た、アートワーク一覧 JSON の相対パス。
+  string artwork_list_file = 5;
+}
+
+// 差し替え指示の流し方。TileFlipFeed の実装に対応する。
+enum FeedKind {
+  // 未指定。FEED_KIND_RANDOMIZED として扱う。
+  FEED_KIND_UNSPECIFIED = 0;
+  // RandomWalkTileFlipFeed: ランダムウォークで選んだタイルへ流す。
+  FEED_KIND_RANDOM_WALK = 1;
+  // ClockwiseSpiralTileFlipFeed: 隅から中心へ時計回りに巻き込むように流す。
+  FEED_KIND_CLOCKWISE_SPIRAL = 2;
+  // FallingColumnTileFlipFeed: 列を上から下へ落としていく。
+  FEED_KIND_FALLING_COLUMN = 3;
+  // ZigzagTileFlipFeed: 折り返しながら尾を引くように流す。
+  FEED_KIND_ZIGZAG = 4;
+  // RandomizedTileFlipFeed: 上の演出をランダムに切り替えながら流し続ける。
+  FEED_KIND_RANDOMIZED = 5;
+}
+
+// どのグリッドへ、どの演出で流すか。TileFlipFeed の init 引数に対応する。
+message FlipsRequest {
+  // グリッドの行数。受け取る側と揃っている必要がある。
+  int32 rows = 1;
+  // グリッドの列数。
+  int32 columns = 2;
+  // 差し替え先に選べるアートワークの数。流れてくる TileFlip.artwork は
+  // 0..<artwork_count に収まる。0 のときはストリームがすぐ終わる。
+  int32 artwork_count = 3;
+  // 流し方。未指定は FEED_KIND_RANDOMIZED と同じ扱い。
+  FeedKind feed_kind = 4;
+  // 次のマスへ進むまでの間隔。既定は 90ms。
+  google.protobuf.Duration step_interval = 5;
+  // クライアントでのフリップ 1 回分の長さ。既定は 600ms。
+  google.protobuf.Duration flip_duration = 6;
+  // FEED_KIND_RANDOMIZED のみ。1 つの演出が流す枚数。
+  // 未指定はグリッド 1 面ぶん (rows * columns)。
+  optional int32 flips_per_turn = 7;
+  // FEED_KIND_RANDOMIZED のみ。残り何枚で次の演出を始めるか。既定は 6。
+  optional int32 handover_flips = 8;
+  // FEED_KIND_FALLING_COLUMN のみ。何カラムあたり 1 本を落とすか。既定は 3。
+  optional int32 columns_per_drop = 9;
+}
+
+// タイル 1 枚を別のアートワークへ差し替える指示。ストリームの 1 メッセージ。
+message TileFlip {
+  // 差し替えるタイルの行。0..<FlipsRequest.rows。
+  int32 row = 1;
+  // 差し替えるタイルの列。0..<FlipsRequest.columns。
+  int32 column = 2;
+  // 差し替え先のアートワークを指す番号。0..<FlipsRequest.artwork_count。
+  // ファイル名ではなく番号で渡すので、送る側はアートワークがどこに何という
+  // 名前で置かれているかを知らずに済む。名前への読み替えは受け取る側の担当。
+  int32 artwork = 3;
+}

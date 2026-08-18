@@ -12,6 +12,7 @@ xcuserdata/
 ## ビルドフェイズが読んで Info.plist に埋め込むので、リポジトリには入れない。
 ## テンプレートの *.local.*.example は含める。
 *.local.txt
+*.local.json
 
 ## App packaging
 *.ipa

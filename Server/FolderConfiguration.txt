@@ -1,0 +1,8 @@
+
+Server/                          # トップレベルフォルダ名(前回提案通り)
+├── Package.swift
+└── Sources/
+    ├── TiledFlipperServerCore/  # サーバーロジック本体(ライブラリターゲット)
+    │   └── ルーティング、GRPCServer設定、ビジネスロジックなど
+    └── TiledFlipperServer/      # 実行可能ターゲット(main.swift)
+        └── Core を呼び出して起動するだけの薄いエントリーポイント
