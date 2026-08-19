@@ -6,6 +6,10 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1790B3C430353239000A1EB0 /* TiledFlipperAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 1790B3C330353239000A1EB0 /* TiledFlipperAPI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		17E14F1D3031FB840036D130 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,9 +34,22 @@
 		17E14F263031FB840036D130 /* TiledFlipperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TiledFlipperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1790B0A1303442B9000A1EB0 /* Exceptions for "TiledFlipper" folder in "TiledFlipper" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 17E14F0E3031FB830036D130 /* TiledFlipper */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		17E14F113031FB830036D130 /* TiledFlipper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1790B0A1303442B9000A1EB0 /* Exceptions for "TiledFlipper" folder in "TiledFlipper" target */,
+			);
 			path = TiledFlipper;
 			sourceTree = "<group>";
 		};
@@ -52,6 +69,7 @@
 		17E14F0C3031FB830036D130 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				1790B3C430353239000A1EB0 /* TiledFlipperAPI in Frameworks */,
 			);
 		};
 		17E14F193031FB840036D130 /* Frameworks */ = {
@@ -67,6 +85,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1790B3C230353239000A1EB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		17E14F063031FB820036D130 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +99,7 @@
 				17E14F1F3031FB840036D130 /* TiledFlipperTests */,
 				17E14F293031FB840036D130 /* TiledFlipperUITests */,
 				1790AA6D30335804000A1EB0 /* openapi.yaml */,
+				1790B3C230353239000A1EB0 /* Frameworks */,
 				17E14F103031FB830036D130 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +132,9 @@
 				17E14F113031FB830036D130 /* TiledFlipper */,
 			);
 			name = TiledFlipper;
+			packageProductDependencies = (
+				1790B3C330353239000A1EB0 /* TiledFlipperAPI */,
+			);
 			productName = TiledFlipper;
 			productReference = 17E14F0F3031FB830036D130 /* TiledFlipper.app */;
 			productType = "com.apple.product-type.application";
@@ -184,6 +213,9 @@
 			);
 			mainGroup = 17E14F063031FB820036D130;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1790B3C1303531F1000A1EB0 /* XCLocalSwiftPackageReference "TiledFlipperAPI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 17E14F103031FB830036D130 /* Products */;
 			projectDirPath = "";
@@ -428,6 +460,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TiledFlipper/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -472,6 +505,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TiledFlipper/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -641,6 +675,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		1790B3C1303531F1000A1EB0 /* XCLocalSwiftPackageReference "TiledFlipperAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TiledFlipperAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1790B3C330353239000A1EB0 /* TiledFlipperAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1790B3C1303531F1000A1EB0 /* XCLocalSwiftPackageReference "TiledFlipperAPI" */;
+			productName = TiledFlipperAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17E14F073031FB820036D130 /* Project object */;
 	validationLevel = 1;

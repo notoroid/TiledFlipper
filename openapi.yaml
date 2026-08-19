@@ -9,8 +9,9 @@ info:
     - 転送は gRPC (HTTP/2)、メッセージのフォーマットは Protocol Buffers (`application/grpc+proto`)。
     - proto の定義はこの文書の `components.schemas` に対応する。`x-protobuf-*` 拡張が
       proto 側の package / message / field 番号を持っている。
-    - 実装元は `TiledFlipper/NetworkArtworkCollection.swift` (アートワーク配布情報) と
-      `TiledFlipper/TileFlipFeeds/*.swift` (差し替え指示)。
+    - サーバー側の実装は `Server/Sources/TiledFlipperServerCore/`。
+      クライアント側は `TiledFlipperAPI/` (生成済みスタブと接続) と
+      `TiledFlipper/TileFlipService.swift` (アプリ側の型への読み替え)。
   license:
     name: See LICENSE in the repository
 x-protobuf-package: tiledflipper.v1

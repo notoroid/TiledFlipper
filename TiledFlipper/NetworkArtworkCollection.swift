@@ -8,40 +8,16 @@
 import Foundation
 import UIKit
 
+/// 1 つのアートワークコレクションの在り処。
+///
+/// `GetDescriptions` が返す `NetworkArtworkDescription` と同じ形。
+/// 取ってくるのは `TileFlipServcice` の担当。
 struct NetworkArtworkDescription: Sendable, Hashable {
     let url: URL
     let name: String
     let revision: Int
     let uniqueIdentifier: String
     let artworkListFile: String
-}
-
-
-@MainActor
-class TileFlipServcice {
-
-    /// 埋め込まれた配布先。URL を書いていないビルドでは nil になる。
-    private static var packageURL: URL? { EmbeddedEndpoints.artworkPackageURL }
-
-    /// 埋め込まれたサービスのエンドポイント。同じく書いていなければ nil。
-    static var serviceURL: URL? { EmbeddedEndpoints.serviceURL }
-
-    static func getDescriptions() async throws -> [NetworkArtworkDescription] {
-        try await Task.sleep(for: .milliseconds(500))
-        guard let url = packageURL else {
-            // 配布先が埋め込まれていないビルド。同梱ぶんだけで動かす。
-            return []
-        }
-        return [
-            .init(
-                url: url,
-                name: "Online artwork",
-                revision: 3,
-                uniqueIdentifier:"64dbd45b0eb7e01bb78db792c570a036dcdf49ef",
-                artworkListFile: "Albumartworks3.json"
-            )
-        ]
-    }
 }
 
 /// ネットワーク越しに配られているアートワークのコレクション。

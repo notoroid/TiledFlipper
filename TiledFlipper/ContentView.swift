@@ -116,15 +116,31 @@ struct ContentView: View {
                     model = TileGridModel(rows: gridRows, columns: gridColumns, catalog: catalog)
                 }
 
-                // 差し替え指示の供給元。`TileFlipFeed` に適合する別の演出
-                // (`RandomWalkTileFlipFeed` など) へ差し替えても、ここから下の扱いは変わらない。
-                let feed = RandomizedTileFlipFeed(
-                    rows: gridRows,
-                    columns: gridColumns,
-                    artworkCount: catalog.artworkCount,
-                    flipDuration: .seconds(TileGridModel.flipDuration)
+                // 差し替え指示はサーバー (`Flips`) から受け取る。どちらの供給元も
+                // 同じ `TileFlipFeed` なので、ここから下の扱いは変わらない。
+                await model.apply(
+                    NetworkTileFlipFeed(
+                        rows: gridRows,
+                        columns: gridColumns,
+                        artworkCount: catalog.artworkCount,
+                        flipDuration: .seconds(TileGridModel.flipDuration)
+                    ).flips()
                 )
-                await model.apply(feed.flips())
+
+                // ここへ来るのは、サーバーへ繋がらなかったか、途中で切れたとき。
+                // 画面が消えた (Task がキャンセルされた) ときは流し直さない。
+                guard !Task.isCancelled else { return }
+
+                // 接続先が無いビルドやサーバーが起きていないときでも動くよう、
+                // 同梱の演出へ落とす。
+                await model.apply(
+                    RandomizedTileFlipFeed(
+                        rows: gridRows,
+                        columns: gridColumns,
+                        artworkCount: catalog.artworkCount,
+                        flipDuration: .seconds(TileGridModel.flipDuration)
+                    ).flips()
+                )
             }
     }
 
