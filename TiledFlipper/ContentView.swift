@@ -78,10 +78,16 @@ struct ContentView: View {
     @State private var isCollectionListVisible = false
     /// 取得中のコレクション。終わるまで一覧では次の選択を受け付けない。
     @State private var fetchingCollectionID: String?
+    /// 差し替え指示がサーバーから届いているか。
+    ///
+    /// 届いた実績で判断する。繋がるかどうかは投げてみるまで分からないので、
+    /// 起動直後や繋がらないときは false のまま (同梱の演出で動いている状態)。
+    @State private var isOnline = false
 
     var body: some View {
         tiles
             .overlay(alignment: .bottomTrailing) { collectionSwitcher }
+            .overlay(alignment: .bottom) { networkStatusIndicator }
             .background(Color.black.ignoresSafeArea())
             // オンラインで配られているコレクションを一覧に足す。
             // アートワークの実体は選ばれたときに落とすので、ここでは名前だけ。
@@ -118,18 +124,26 @@ struct ContentView: View {
 
                 // 差し替え指示はサーバー (`Flips`) から受け取る。どちらの供給元も
                 // 同じ `TileFlipFeed` なので、ここから下の扱いは変わらない。
-                await model.apply(
-                    NetworkTileFlipFeed(
-                        rows: gridRows,
-                        columns: gridColumns,
-                        artworkCount: catalog.artworkCount,
-                        flipDuration: .seconds(TileGridModel.flipDuration)
-                    ).flips()
+                //
+                // 1 件でも届けばネットワーク経由で動いていると分かるので、そこで表示を
+                // 切り替える。それを見たいので、ここだけ 1 件ずつ受け取る。
+                let networkFeed = NetworkTileFlipFeed(
+                    rows: gridRows,
+                    columns: gridColumns,
+                    artworkCount: catalog.artworkCount,
+                    flipDuration: .seconds(TileGridModel.flipDuration)
                 )
+                for await flip in networkFeed.flips() {
+                    if !isOnline {
+                        withAnimation(.snappy) { isOnline = true }
+                    }
+                    model.apply(flip)
+                }
 
                 // ここへ来るのは、サーバーへ繋がらなかったか、途中で切れたとき。
                 // 画面が消えた (Task がキャンセルされた) ときは流し直さない。
                 guard !Task.isCancelled else { return }
+                withAnimation(.snappy) { isOnline = false }
 
                 // 接続先が無いビルドやサーバーが起きていないときでも動くよう、
                 // 同梱の演出へ落とす。
@@ -142,6 +156,26 @@ struct ContentView: View {
                     ).flips()
                 )
             }
+    }
+
+    /// 画面下中央に出す、差し替え指示の出どころの表示。
+    ///
+    /// サーバーから届いている間は `network`、繋がらず同梱の演出で動いている間は
+    /// `network.slash` を出す。触るものではないので、ボタンにも Liquid Glass にも
+    /// しない。記号だけを置いて、押せそうに見せない。
+    private var networkStatusIndicator: some View {
+        Image(systemName: isOnline ? "network" : "network.slash")
+            .font(.title2)
+            .foregroundStyle(isOnline ? Color.white : Color.orange)
+            // 横長の画面ではタイルが記号の位置まで広がる。下地を敷かない代わりに、
+            // ずらさない影を回り込ませて、アートワークの上でも輪郭が消えないようにする。
+            .shadow(color: .black.opacity(0.8), radius: 3)
+            // 2 つの記号は形が近いので、入れ替えを繋げて見せる
+            .contentTransition(.symbolEffect(.replace))
+            .accessibilityLabel(isOnline ? "Flips from server" : "Offline, using bundled flips")
+            // 右下のコレクションボタンと同じ高さに並ぶよう、余白を合わせておく
+            .padding(10)
+            .padding(.bottom, 16)
     }
 
     /// 画面右下のボタンと、そこから開くアートワークコレクションのカード一覧。
