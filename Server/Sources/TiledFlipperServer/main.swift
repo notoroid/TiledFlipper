@@ -42,7 +42,9 @@ struct Serve: AsyncParsableCommand {
             }
         }
 
-        fflush(stdout)
+        // `stdout` を直接参照すると Linux (Glibc) では並行処理安全性チェックに
+        // 引っかかるので、全ストリームを flush する `fflush(nil)` を使う。
+        fflush(nil)
 
         try await TiledFlipperTestServer(host: host, port: port, catalog: catalog).run()
     }

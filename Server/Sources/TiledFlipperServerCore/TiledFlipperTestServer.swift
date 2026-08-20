@@ -47,7 +47,9 @@ public struct TiledFlipperTestServer: Sendable {
             let address = try await transport.listeningAddress
             print("TiledFlipperServer listening on \(address)")
             // ログをファイルへ流していても、起動したことがすぐ分かるようにする。
-            fflush(stdout)
+            // `stdout` を直接参照すると Linux (Glibc) では並行処理安全性チェックに
+            // 引っかかるので、全ストリームを flush する `fflush(nil)` を使う。
+            fflush(nil)
         }
     }
 }

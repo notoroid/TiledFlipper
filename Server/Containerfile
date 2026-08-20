@@ -1,0 +1,42 @@
+# TiledFlipper のローカルテストサーバーを Apple Container (`container` CLI) や
+# 一般的な OCI ランタイムでビルド・実行するための Containerfile。
+#
+# マルチステージビルド: `swift:6.3` でビルドし、`swift:6.3-slim` へ成果物だけ
+# コピーして実行する。将来 Google Cloud Run / AWS App Runner 等へそのまま
+# デプロイする場合も同じイメージを使い回せる。
+#
+# ビルド (リポジトリルートから):
+#   container build -t tiledflipper-server -f Server/Containerfile Server
+#
+# 実行 (コンテナは自分の IP を持つので `container inspect` で確認して繋ぐ。
+# Apple Container のボリュームマウントはディレクトリ単位で、単一ファイルは
+# 直接マウントできないので、Server/ ごとマウントして --catalog で指す):
+#   container run -d --name tiledflipper-server \
+#     -v "$(pwd)/Server:/data:ro" \
+#     tiledflipper-server \
+#     --host 0.0.0.0 --port 8080 --catalog /data/ArtworkPackages.local.json
+#
+# まとめて行うなら Server/Scripts/run-in-container.sh を使う。
+
+FROM swift:6.3 AS builder
+
+WORKDIR /app
+COPY Package.swift Package.resolved .
+COPY Sources/ Sources/
+
+RUN swift build -c release --product TiledFlipperServer
+RUN cp "$(swift build -c release --show-bin-path)/TiledFlipperServer" /usr/bin/TiledFlipperServer
+
+FROM swift:6.3-slim
+
+COPY --from=builder /usr/bin/TiledFlipperServer /usr/bin/TiledFlipperServer
+
+# ArtworkPackages.local.json はカレントディレクトリから読むので、
+# 実行時のワークディレクトリをここに揃えておく (無ければ空の一覧で起動する)。
+WORKDIR /app
+
+EXPOSE 8080
+ENTRYPOINT ["/usr/bin/TiledFlipperServer"]
+# コンテナの外 (Mac ホストや実機) から繋がるように 0.0.0.0 で待ち受ける。
+# `container run` 側で追加の引数を渡すとこの既定値を上書きできる。
+CMD ["--host", "0.0.0.0", "--port", "8080"]
