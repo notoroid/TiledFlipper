@@ -1,5 +1,4 @@
 .build/
-*.local.json
 *.local.txt
 Tools/
 Doc/

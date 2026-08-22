@@ -32,8 +32,16 @@ FROM swift:6.3-slim
 COPY --from=builder /usr/bin/TiledFlipperServer /usr/bin/TiledFlipperServer
 
 # ArtworkPackages.local.json はカレントディレクトリから読むので、
-# 実行時のワークディレクトリをここに揃えておく (無ければ空の一覧で起動する)。
+# 実行時のワークディレクトリをここに揃えておく。
 WORKDIR /app
+
+# Cloud Run 等、実行時にローカルファイルをマウントできない環境向けに
+# ビルド時点でイメージへ焼き込む (中身は配布 URL と版数だけで機微情報は無い)。
+# Apple Container でローカル実行するときは `container run --catalog` で
+# 別のファイルを指せば、こちらは無視されそちらが優先される。
+# このファイルが無いとビルドが失敗するので、無ければ
+# `cp ArtworkPackages.example.json ArtworkPackages.local.json` で作ること。
+COPY ArtworkPackages.local.json ./
 
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/TiledFlipperServer"]
