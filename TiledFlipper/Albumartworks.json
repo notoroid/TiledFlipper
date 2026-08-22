@@ -1,902 +1,302 @@
 [
   {
-    "album" : "Yuna",
-    "artist" : "Yuna",
-    "compactArtwork" : "Albumartworks.files/001-compact.png",
-    "title" : "Live Your Life",
-    "year" : 2012,
-    "genre" : "Pop",
     "artwork" : "Albumartworks.files/001.png"
   },
   {
-    "album" : "Kill Bill, Vol. 2",
-    "artist" : "Shivaree",
-    "compactArtwork" : "Albumartworks.files/002-compact.png",
-    "title" : "Goodnight Moon",
-    "year" : 1999,
-    "genre" : "Soundtrack",
     "artwork" : "Albumartworks.files/002.png"
   },
   {
-    "album" : "Feels Like Home",
-    "artist" : "Norah Jones",
-    "compactArtwork" : "Albumartworks.files/003-compact.png",
-    "title" : "What Am I to You",
-    "year" : 2004,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/003.png"
   },
   {
-    "album" : "Seventh Tree",
-    "artist" : "Goldfrapp",
-    "compactArtwork" : "Albumartworks.files/004-compact.png",
-    "title" : "Little Bird",
-    "year" : 2008,
-    "genre" : "ポップ",
     "artwork" : "Albumartworks.files/004.png"
   },
   {
-    "genre" : "ダンス",
-    "year" : 2006,
-    "album" : "Lunatico",
-    "title" : "Notas",
-    "artwork" : "Albumartworks.files/005.png",
-    "artist" : "Gotan Project",
-    "compactArtwork" : "Albumartworks.files/005-compact.png"
+    "artwork" : "Albumartworks.files/005.png"
   },
   {
-    "genre" : "エレクトロニック",
-    "year" : 2007,
-    "album" : "Breaking the Ice (Edition One)",
-    "title" : "Essence of Our Origins",
-    "artwork" : "Albumartworks.files/006.png",
-    "artist" : "The Lushlife Project",
-    "compactArtwork" : "Albumartworks.files/006-compact.png"
+    "artwork" : "Albumartworks.files/006.png"
   },
   {
-    "genre" : "エレクトロニック",
-    "year" : 2001,
-    "album" : "WALTZ FOR KOOP.",
-    "title" : "Baby (feat. Cecilia Stalin)",
-    "artwork" : "Albumartworks.files/007.png",
-    "artist" : "Koop",
-    "compactArtwork" : "Albumartworks.files/007-compact.png"
+    "artwork" : "Albumartworks.files/007.png"
   },
   {
-    "genre" : "エレクトロニック",
-    "year" : 2011,
-    "album" : "Buddha Essentials",
-    "title" : "Aldalá",
-    "artwork" : "Albumartworks.files/008.png",
-    "artist" : "Amira Alaf",
-    "compactArtwork" : "Albumartworks.files/008-compact.png"
+    "artwork" : "Albumartworks.files/008.png"
   },
   {
-    "artwork" : "Albumartworks.files/009.png",
-    "artist" : "Club des Belugas",
-    "album" : "Zoo Zizaro",
-    "year" : 2010,
-    "compactArtwork" : "Albumartworks.files/009-compact.png",
-    "genre" : "ジャズ",
-    "title" : "Zoo Zizaro"
+    "artwork" : "Albumartworks.files/009.png"
   },
   {
-    "artwork" : "Albumartworks.files/010.png",
-    "artist" : "Tape Five",
-    "album" : "Bossa for a Coup - Special Bonus Edition",
-    "year" : 2008,
-    "compactArtwork" : "Albumartworks.files/010-compact.png",
-    "genre" : "エレクトロニック",
-    "title" : "The Smell of the Sidewalk"
+    "artwork" : "Albumartworks.files/010.png"
   },
   {
-    "artwork" : "Albumartworks.files/010.png",
-    "artist" : "Tape Five",
-    "album" : "Bossa for a Coup - Special Bonus Edition",
-    "year" : 2008,
-    "compactArtwork" : "Albumartworks.files/010-compact.png",
-    "genre" : "エレクトロニック",
-    "title" : "Bossa Reloaded"
+    "artwork" : "Albumartworks.files/010.png"
   },
   {
-    "artwork" : "Albumartworks.files/012.png",
-    "artist" : "Diana Krall",
-    "album" : "Quiet Nights",
-    "year" : 2009,
-    "compactArtwork" : "Albumartworks.files/012-compact.png",
-    "genre" : "ジャズ",
-    "title" : "You're My Thrill"
+    "artwork" : "Albumartworks.files/012.png"
   },
   {
-    "artwork" : "Albumartworks.files/013.png",
-    "artist" : "Club des Belugas",
-    "album" : "Swop",
-    "year" : 2008,
-    "compactArtwork" : "Albumartworks.files/013-compact.png",
-    "genre" : "エレクトロニック",
-    "title" : "Wearing Out My Shoes"
+    "artwork" : "Albumartworks.files/013.png"
   },
   {
-    "artwork" : "Albumartworks.files/014.png",
-    "artist" : "Nekta",
-    "album" : "Storybook",
-    "year" : 2009,
-    "compactArtwork" : "Albumartworks.files/014-compact.png",
-    "genre" : "エレクトロニック",
-    "title" : "No Need to Rumble"
+    "artwork" : "Albumartworks.files/014.png"
   },
   {
-    "artwork" : "Albumartworks.files/015.png",
-    "artist" : "Nat \"King\" Cole",
-    "album" : "Re:Generations",
-    "year" : 2009,
-    "compactArtwork" : "Albumartworks.files/015-compact.png",
-    "genre" : "ポップ",
-    "title" : "Lush Life"
+    "artwork" : "Albumartworks.files/015.png"
   },
   {
-    "year" : 2002,
-    "genre" : "ジャズ",
-    "album" : "[re:jazz]",
-    "artist" : "[re:jazz]",
-    "artwork" : "Albumartworks.files/016.png",
-    "compactArtwork" : "Albumartworks.files/016-compact.png",
-    "title" : "Quiet Nights"
+    "artwork" : "Albumartworks.files/016.png"
   },
   {
-    "year" : 2009,
-    "genre" : "ポップ",
-    "album" : "Re:Generations",
-    "artist" : "Nat \"King\" Cole",
-    "artwork" : "Albumartworks.files/015.png",
-    "compactArtwork" : "Albumartworks.files/015-compact.png",
-    "title" : "Brazilian Love Song"
+    "artwork" : "Albumartworks.files/015.png"
   },
   {
-    "year" : 2011,
-    "genre" : "オルタナティブ",
-    "album" : "Selections from Road Atlas (1998-2011)",
-    "artist" : "Calexico",
-    "artwork" : "Albumartworks.files/018.png",
-    "compactArtwork" : "Albumartworks.files/018-compact.png",
-    "title" : "El Morro"
+    "artwork" : "Albumartworks.files/018.png"
   },
   {
-    "year" : 2007,
-    "genre" : "オルタナティブ",
-    "album" : "Wincing the Night Away",
-    "artist" : "The Shins",
-    "artwork" : "Albumartworks.files/019.png",
-    "compactArtwork" : "Albumartworks.files/019-compact.png",
-    "title" : "Red Rabbits"
+    "artwork" : "Albumartworks.files/019.png"
   },
   {
-    "year" : 2012,
-    "genre" : "ポップ",
-    "album" : "Here There and Everywhere - Single (In the Style of Céline Dion) [Performance Track with Demonstration Vocals]",
-    "artist" : "Done Again",
-    "artwork" : "Albumartworks.files/020.png",
-    "compactArtwork" : "Albumartworks.files/020-compact.png",
-    "title" : "Here There and Everywhere - Single (In the Style of Céline Dion) [Performance Track with Demonstration Vocals]"
+    "artwork" : "Albumartworks.files/020.png"
   },
   {
-    "year" : 2012,
-    "genre" : "ポップ",
-    "album" : "iTunes Live from Capitol Studios",
-    "artist" : "Paul McCartney",
-    "artwork" : "Albumartworks.files/021.png",
-    "compactArtwork" : "Albumartworks.files/021-compact.png",
-    "title" : "Home (When Shadows Fall) [Live from Capitol Studios]"
+    "artwork" : "Albumartworks.files/021.png"
   },
   {
-    "year" : 2011,
-    "genre" : "ロック",
-    "album" : "The Valley Wind",
-    "artist" : "Tyler Ramsey",
-    "artwork" : "Albumartworks.files/022.png",
-    "compactArtwork" : "Albumartworks.files/022-compact.png",
-    "title" : "The Nightbird"
+    "artwork" : "Albumartworks.files/022.png"
   },
   {
-    "year" : 1975,
-    "genre" : "ポップ",
-    "album" : "Silver Morning",
-    "artist" : "Kenny Rankin",
-    "artwork" : "Albumartworks.files/023.png",
-    "compactArtwork" : "Albumartworks.files/023-compact.png",
-    "title" : "Penny Lane"
+    "artwork" : "Albumartworks.files/023.png"
   },
   {
-    "year" : 1995,
-    "genre" : "ワールド",
-    "album" : "Cesaria",
-    "artist" : "Césaria Évora",
-    "artwork" : "Albumartworks.files/024.png",
-    "compactArtwork" : "Albumartworks.files/024-compact.png",
-    "title" : "Petit pays"
+    "artwork" : "Albumartworks.files/024.png"
   },
   {
-    "year" : 1987,
-    "genre" : "ジャズ",
-    "album" : "It Could Happen to You",
-    "artist" : "Chet Baker",
-    "artwork" : "Albumartworks.files/025.png",
-    "compactArtwork" : "Albumartworks.files/025-compact.png",
-    "title" : "You Make Me Feel So Young"
+    "artwork" : "Albumartworks.files/025.png"
   },
   {
-    "year" : 2001,
-    "genre" : "エレクトロニック",
-    "album" : "La Revancha del Tango",
-    "artist" : "Gotan Project",
-    "artwork" : "Albumartworks.files/026.png",
-    "compactArtwork" : "Albumartworks.files/026-compact.png",
-    "title" : "Last Tango In Paris"
+    "artwork" : "Albumartworks.files/026.png"
   },
   {
-    "year" : 2001,
-    "genre" : "エレクトロニック",
-    "album" : "Remember Tomorrow",
-    "artist" : "Mo' Horizons",
-    "artwork" : "Albumartworks.files/027.png",
-    "compactArtwork" : "Albumartworks.files/027-compact.png",
-    "title" : "Superworld (Children´s World Replay)"
+    "artwork" : "Albumartworks.files/027.png"
   },
   {
-    "year" : 2000,
-    "genre" : "ジャズ",
-    "album" : "The Complete Pacific Jazz Recordings of Gerald Wilson and His Orchestra (Remastered)",
-    "artist" : "Gerald Wilson and His Orchestra",
-    "artwork" : "Albumartworks.files/028.png",
-    "compactArtwork" : "Albumartworks.files/028-compact.png",
-    "title" : "Viva Tirado"
+    "artwork" : "Albumartworks.files/028.png"
   },
   {
-    "year" : 2012,
-    "genre" : "ジャズ",
-    "album" : "From Newport To London: Greatest Hits (Live) ... and More",
-    "artist" : "Basia",
-    "artwork" : "Albumartworks.files/029.png",
-    "compactArtwork" : "Albumartworks.files/029-compact.png",
-    "title" : "From Newport to London"
+    "artwork" : "Albumartworks.files/029.png"
   },
   {
-    "year" : 2011,
-    "genre" : "ジャズ",
-    "album" : "100 Masterpieces",
-    "artist" : "Chet Baker, Russ Freeman, Carson Smith & Bob Neel",
-    "artwork" : "Albumartworks.files/030.png",
-    "compactArtwork" : "Albumartworks.files/030-compact.png",
-    "title" : "Old Devil Moon"
+    "artwork" : "Albumartworks.files/030.png"
   },
   {
-    "year" : 2010,
-    "genre" : "エレクトロニック",
-    "album" : "Black Sands",
-    "artist" : "Bonobo",
-    "artwork" : "Albumartworks.files/031.png",
-    "compactArtwork" : "Albumartworks.files/031-compact.png",
-    "title" : "El Toro"
+    "artwork" : "Albumartworks.files/031.png"
   },
   {
-    "year" : 2007,
-    "genre" : "レゲエ",
-    "album" : "The Best of Original British Lovers Rock, Vol. 1",
-    "artist" : "Janet Kay",
-    "artwork" : "Albumartworks.files/032.png",
-    "compactArtwork" : "Albumartworks.files/032-compact.png",
-    "title" : "Loving You"
+    "artwork" : "Albumartworks.files/032.png"
   },
   {
-    "year" : 2004,
-    "genre" : "エレクトロニック",
-    "album" : "Cantoma",
-    "artist" : "Nicolaj Grandjean, Phil Mison & Tanja Thulau",
-    "artwork" : "Albumartworks.files/033.png",
-    "compactArtwork" : "Albumartworks.files/033-compact.png",
-    "title" : "Essarai"
+    "artwork" : "Albumartworks.files/033.png"
   },
   {
-    "year" : 2001,
-    "genre" : "エレクトロニック",
-    "album" : "La Revancha del Tango",
-    "artist" : "Gotan Project",
-    "artwork" : "Albumartworks.files/026.png",
-    "compactArtwork" : "Albumartworks.files/026-compact.png",
-    "title" : "Queremos Paz"
+    "artwork" : "Albumartworks.files/026.png"
   },
   {
-    "year" : 2012,
-    "genre" : "ジャズ",
-    "album" : "Jazz Elegance (60 Tracks Remastered)",
-    "artist" : "Wes Montgomery",
-    "artwork" : "Albumartworks.files/035.png",
-    "compactArtwork" : "Albumartworks.files/035-compact.png",
-    "title" : "Summertime"
+    "artwork" : "Albumartworks.files/035.png"
   },
   {
-    "year" : 2011,
-    "genre" : "エレクトロニック",
-    "album" : "Electro Swing, Vol. 4 (Selected by Bart & Baker)",
-    "artist" : "Dimitri From Paris",
-    "artwork" : "Albumartworks.files/036.png",
-    "compactArtwork" : "Albumartworks.files/036-compact.png",
-    "title" : "Sacré français (Bart & Baker Remix)"
+    "artwork" : "Albumartworks.files/036.png"
   },
   {
-    "artist" : "Susana Baca",
-    "year" : 2000,
-    "artwork" : "Albumartworks.files/037.png",
-    "album" : "Eco de Sombras",
-    "compactArtwork" : "Albumartworks.files/037-compact.png",
-    "title" : "De los Amores",
-    "genre" : "ワールド"
+    "artwork" : "Albumartworks.files/037.png"
   },
   {
-    "artist" : "Césaria Évora",
-    "year" : 1992,
-    "artwork" : "Albumartworks.files/038.png",
-    "album" : "Miss Perfumado",
-    "compactArtwork" : "Albumartworks.files/038-compact.png",
-    "title" : "Sodade",
-    "genre" : "ワールド"
+    "artwork" : "Albumartworks.files/038.png"
   },
   {
-    "artist" : "Minus 8",
-    "year" : 2002,
-    "artwork" : "Albumartworks.files/039.png",
-    "album" : "Minuit",
-    "compactArtwork" : "Albumartworks.files/039-compact.png",
-    "title" : "The Sun",
-    "genre" : "エレクトロニック"
+    "artwork" : "Albumartworks.files/039.png"
   },
   {
-    "artist" : "Susana Baca",
-    "year" : 2002,
-    "artwork" : "Albumartworks.files/040.png",
-    "album" : "Espíritu Vivo",
-    "compactArtwork" : "Albumartworks.files/040-compact.png",
-    "title" : "Afro-blue / Zum Zum",
-    "genre" : "ワールド"
+    "artwork" : "Albumartworks.files/040.png"
   },
   {
-    "artist" : "Art Pepper",
-    "year" : 1957,
-    "artwork" : "Albumartworks.files/041.png",
-    "album" : "Art Pepper Meets the Rhythm Section",
-    "compactArtwork" : "Albumartworks.files/041-compact.png",
-    "title" : "You'd Be So Nice to Come Home To",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks.files/041.png"
   },
   {
-    "artist" : "Frank Sinatra & Antonio Carlos Jobim",
-    "year" : 1967,
-    "artwork" : "Albumartworks.files/042.png",
-    "album" : "Francis Albert Sinatra & Antonio Carlos Jobim",
-    "compactArtwork" : "Albumartworks.files/042-compact.png",
-    "title" : "I Concentrate On You",
-    "genre" : "ブラジル"
+    "artwork" : "Albumartworks.files/042.png"
   },
   {
-    "artist" : "Great Lake Swimmers",
-    "year" : 2007,
-    "artwork" : "Albumartworks.files/043.png",
-    "album" : "Ongiara",
-    "compactArtwork" : "Albumartworks.files/043-compact.png",
-    "title" : "Catcher Song",
-    "genre" : "シンガーソングライター"
+    "artwork" : "Albumartworks.files/043.png"
   },
   {
-    "artist" : "Pickin' On Series",
-    "year" : 2011,
-    "artwork" : "Albumartworks.files/044.png",
-    "album" : "The Bluegrass Tribute to The Avett Brothers",
-    "compactArtwork" : "Albumartworks.files/044-compact.png",
-    "title" : "I and Love and You",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks.files/044.png"
   },
   {
-    "artist" : "Jack Johnson",
-    "year" : 2010,
-    "artwork" : "Albumartworks.files/045.png",
-    "album" : "To the Sea",
-    "compactArtwork" : "Albumartworks.files/045-compact.png",
-    "title" : "To the Sea",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks.files/045.png"
   },
   {
-    "artist" : "Zee Avi",
-    "year" : 2011,
-    "artwork" : "Albumartworks.files/046.png",
-    "album" : "Ghostbird",
-    "compactArtwork" : "Albumartworks.files/046-compact.png",
-    "title" : "Bag of Gold",
-    "genre" : "オルタナティブ"
+    "artwork" : "Albumartworks.files/046.png"
   },
   {
-    "artist" : "Michael Kiwanuka",
-    "year" : 2011,
-    "artwork" : "Albumartworks.files/047.png",
-    "album" : "Home Again - Single",
-    "compactArtwork" : "Albumartworks.files/047-compact.png",
-    "title" : "Home Again",
-    "genre" : "R&B／ソウル"
+    "artwork" : "Albumartworks.files/047.png"
   },
   {
-    "artist" : "Sarah Jarosz",
-    "year" : 2011,
-    "artwork" : "Albumartworks.files/048.png",
-    "album" : "Follow Me Down",
-    "compactArtwork" : "Albumartworks.files/048-compact.png",
-    "title" : "Gypsy",
-    "genre" : "シンガーソングライター"
+    "artwork" : "Albumartworks.files/048.png"
   },
   {
-    "artist" : "Danger Mouse & Daniele Luppi",
-    "year" : 2011,
-    "artwork" : "Albumartworks.files/049.png",
-    "album" : "Rome",
-    "compactArtwork" : "Albumartworks.files/049-compact.png",
-    "title" : "Season's Trees (feat. Norah Jones)",
-    "genre" : "オルタナティブ"
+    "artwork" : "Albumartworks.files/049.png"
   },
   {
-    "artist" : "Bitter:Sweet",
-    "year" : 2010,
-    "artwork" : "Albumartworks.files/050.png",
-    "album" : "The Break Up - EP",
-    "compactArtwork" : "Albumartworks.files/050-compact.png",
-    "title" : "Lovely Day",
-    "genre" : "エレクトロニック"
+    "artwork" : "Albumartworks.files/050.png"
   },
   {
-    "artist" : "Koop",
-    "year" : 2006,
-    "artwork" : "Albumartworks.files/051.png",
-    "album" : "Koop Islands",
-    "compactArtwork" : "Albumartworks.files/051-compact.png",
-    "title" : "Let's Elope (Vocals By Mikael Sundin)",
-    "genre" : "エレクトロニック"
+    "artwork" : "Albumartworks.files/051.png"
   },
   {
-    "artist" : "Astrud Gilberto",
-    "year" : 1965,
-    "artwork" : "Albumartworks.files/052.png",
-    "album" : "The Shadow of Your Smile",
-    "compactArtwork" : "Albumartworks.files/052-compact.png",
-    "title" : "Fly Me to the Moon",
-    "genre" : "ブラジル"
+    "artwork" : "Albumartworks.files/052.png"
   },
   {
-    "artist" : "Fruit Bats",
-    "year" : 2009,
-    "artwork" : "Albumartworks.files/053.png",
-    "album" : "The Ruminant Band",
-    "compactArtwork" : "Albumartworks.files/053-compact.png",
-    "title" : "Beautiful Morning Light",
-    "genre" : "オルタナティブ"
+    "artwork" : "Albumartworks.files/053.png"
   },
   {
-    "artist" : "Diana Krall",
-    "year" : 2009,
-    "artwork" : "Albumartworks.files/012.png",
-    "album" : "Quiet Nights",
-    "compactArtwork" : "Albumartworks.files/012-compact.png",
-    "title" : "Too Marvelous for Words",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks.files/012.png"
   },
   {
-    "artist" : "Sarah Vaughan",
-    "year" : 2007,
-    "artwork" : "Albumartworks.files/055.png",
-    "album" : "The Very Best of Sarah Vaughan",
-    "compactArtwork" : "Albumartworks.files/055-compact.png",
-    "title" : "Whatever Lola Wants",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks.files/055.png"
   },
   {
-    "artist" : "Gabin & Jho Jenkins",
-    "year" : 2005,
-    "artwork" : "Albumartworks.files/056.png",
-    "album" : "Mr. Freedom",
-    "compactArtwork" : "Albumartworks.files/056-compact.png",
-    "title" : "It'S Gonna Be",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks.files/056.png"
   },
   {
-    "artist" : "Keola Beamer",
-    "year" : 1999,
-    "artwork" : "Albumartworks.files/057.png",
-    "album" : "Kolonahe - from the Gentle Wind",
-    "compactArtwork" : "Albumartworks.files/057-compact.png",
-    "title" : "Shaka Slack Key (feat. George Winston) [Instrumental]",
-    "genre" : "ワールド"
+    "artwork" : "Albumartworks.files/057.png"
   },
   {
-    "title" : "(Getting Some) Fun Out of Life",
-    "album" : "Dreamland",
-    "artist" : "Madeleine Peyroux",
-    "compactArtwork" : "Albumartworks.files/058-compact.png",
-    "year" : 1996,
-    "genre" : "ロック",
     "artwork" : "Albumartworks.files/058.png"
   },
   {
-    "title" : "Slow Motion Bossa Nova",
-    "album" : "Juventude / Slow Motion Bossa Nova",
-    "artist" : "Celso Fonseca & Ronaldo Bastos",
-    "compactArtwork" : "Albumartworks.files/059-compact.png",
-    "year" : 2003,
-    "genre" : "ボサ・ノヴァ",
     "artwork" : "Albumartworks.files/059.png"
   },
   {
-    "title" : "Flootie",
-    "album" : "Big",
-    "artist" : "New Cool Collective",
-    "compactArtwork" : "Albumartworks.files/060-compact.png",
-    "year" : 2000,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/060.png"
   },
   {
-    "title" : "Falling Slowly",
-    "album" : "The Swell Season (with Marja Tuhkanen & Bertrand Galen)",
-    "artist" : "Glen Hansard & Marketa Irglova",
-    "compactArtwork" : "Albumartworks.files/061-compact.png",
-    "year" : 2006,
-    "genre" : "オルタナティブ",
     "artwork" : "Albumartworks.files/061.png"
   },
   {
-    "title" : "White Winter Hymnal (祝福の大地)",
-    "album" : "Fleet Foxes + Sun Giant EP (フリート フォクシーズ プラス サン ジャイアント EP)",
-    "artist" : "Fleet Foxes",
-    "compactArtwork" : "Albumartworks.files/062-compact.png",
-    "year" : 2009,
-    "genre" : "オルタナティブ",
     "artwork" : "Albumartworks.files/062.png"
   },
   {
-    "title" : "Summersong",
-    "album" : "The Crane Wife",
-    "artist" : "The Decemberists",
-    "compactArtwork" : "Albumartworks.files/063-compact.png",
-    "year" : 2006,
-    "genre" : "ポップ",
     "artwork" : "Albumartworks.files/063.png"
   },
   {
-    "title" : "Question and Answer",
-    "album" : "Question and Answer (Remastered)",
-    "artist" : "Pat Metheny",
-    "compactArtwork" : "Albumartworks.files/064-compact.png",
-    "year" : 1989,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/064.png"
   },
   {
-    "title" : "Kukuna O Ka La",
-    "album" : "In The Saddle",
-    "artist" : "Ledward Kaapana & Bob Brozman",
-    "compactArtwork" : "Albumartworks.files/065-compact.png",
-    "year" : 2001,
-    "genre" : "ワールド",
     "artwork" : "Albumartworks.files/065.png"
   },
   {
-    "title" : "Glad Man Singing",
-    "album" : "Kiss Each Other Clean",
-    "artist" : "Iron & Wine",
-    "compactArtwork" : "Albumartworks.files/066-compact.png",
-    "year" : 2011,
-    "genre" : "オルタナティブ",
     "artwork" : "Albumartworks.files/066.png"
   },
   {
-    "title" : "Cello Song",
-    "album" : "Five Leaves Left",
-    "artist" : "Nick Drake",
-    "compactArtwork" : "Albumartworks.files/067-compact.png",
-    "year" : 1969,
-    "genre" : "シンガーソングライター",
     "artwork" : "Albumartworks.files/067.png"
   },
   {
-    "title" : "Don’t Go",
-    "album" : "Bande a Part",
-    "artist" : "Nouvelle Vague",
-    "compactArtwork" : "Albumartworks.files/068-compact.png",
-    "year" : 2006,
-    "genre" : "エレクトロニック",
     "artwork" : "Albumartworks.files/068.png"
   },
   {
-    "title" : "Any Day Will Do Fine",
-    "album" : "Home Again (Deluxe Version)",
-    "artist" : "Michael Kiwanuka",
-    "compactArtwork" : "Albumartworks.files/069-compact.png",
-    "year" : 2012,
-    "genre" : "R&B／ソウル",
     "artwork" : "Albumartworks.files/069.png"
   },
   {
-    "title" : "Waltz For Koop (feat. Cecilia Stalin)",
-    "album" : "WALTZ FOR KOOP.",
-    "artist" : "Koop",
-    "compactArtwork" : "Albumartworks.files/070-compact.png",
-    "year" : 2001,
-    "genre" : "エレクトロニック",
     "artwork" : "Albumartworks.files/070.png"
   },
   {
-    "title" : "Desafinado",
-    "album" : "Getz / Gilberto",
-    "artist" : "João Gilberto & Stan Getz",
-    "compactArtwork" : "Albumartworks.files/071-compact.png",
-    "year" : 1997,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/071.png"
   },
   {
-    "title" : "Little Sheri (45 Single Take)",
-    "album" : "Look Out! (The Rudy Van Gelder Edition Remastered)",
-    "artist" : "Stanley Turrentine",
-    "compactArtwork" : "Albumartworks.files/072-compact.png",
-    "year" : 2008,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/072.png"
   },
   {
-    "title" : "Heaven",
-    "album" : "What Sound",
-    "artist" : "Lamb",
-    "compactArtwork" : "Albumartworks.files/073-compact.png",
-    "year" : 2001,
-    "genre" : "エレクトロニック",
     "artwork" : "Albumartworks.files/073.png"
   },
   {
-    "title" : "All Day Music",
-    "album" : "Romantic Evolution One - Soul Fusion Concept",
-    "artist" : "War",
-    "compactArtwork" : "Albumartworks.files/074-compact.png",
-    "year" : 2007,
-    "genre" : "R&B／ソウル",
     "artwork" : "Albumartworks.files/074.png"
   },
   {
-    "title" : "Paloma",
-    "album" : "Gusto Latino 2008",
-    "artist" : "Pacifika",
-    "compactArtwork" : "Albumartworks.files/075-compact.png",
-    "year" : 2007,
-    "genre" : "Pop Latino",
     "artwork" : "Albumartworks.files/075.png"
   },
   {
-    "title" : "Is This Love",
-    "album" : "Legend (Bonus Track Version)",
-    "artist" : "Bob Marley",
-    "compactArtwork" : "Albumartworks.files/076-compact.png",
-    "year" : 2002,
-    "genre" : "レゲエ",
     "artwork" : "Albumartworks.files/076.png"
   },
   {
-    "title" : "Sailin' the Wind",
-    "album" : "The Best: Loggins & Messina Sittin' In Again",
-    "artist" : "Loggins & Messina",
-    "compactArtwork" : "Albumartworks.files/077-compact.png",
-    "year" : 1972,
-    "genre" : "ポップ",
     "artwork" : "Albumartworks.files/077.png"
   },
   {
-    "title" : "Twilight At the Zuq",
-    "album" : "The Best of Strunz & Farah",
-    "artist" : "Strunz & Farah",
-    "compactArtwork" : "Albumartworks.files/078-compact.png",
-    "year" : 2000,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks.files/078.png"
   },
   {
-    "artwork" : "Albumartworks.files/079.png",
-    "genre" : "ポップ",
-    "compactArtwork" : "Albumartworks.files/079-compact.png",
-    "title" : "Astrud",
-    "artist" : "Basia",
-    "year" : 1998,
-    "album" : "Clear Horizon - The Best of Basia"
+    "artwork" : "Albumartworks.files/079.png"
   },
   {
-    "artwork" : "Albumartworks.files/080.png",
-    "genre" : "レゲエ",
-    "compactArtwork" : "Albumartworks.files/080-compact.png",
-    "title" : "Dock of the Bay",
-    "artist" : "Dennis Brown",
-    "year" : 2011,
-    "album" : "Best Of Dennis Brown"
+    "artwork" : "Albumartworks.files/080.png"
   },
   {
-    "artwork" : "Albumartworks.files/081.png",
-    "genre" : "シンガーソングライター",
-    "compactArtwork" : "Albumartworks.files/081-compact.png",
-    "title" : "For Today",
-    "artist" : "Jessica Lea Mayfield",
-    "year" : 2008,
-    "album" : "With Blasphemy So Heartfelt"
+    "artwork" : "Albumartworks.files/081.png"
   },
   {
-    "artwork" : "Albumartworks.files/082.png",
-    "genre" : "ジャズ",
-    "compactArtwork" : "Albumartworks.files/082-compact.png",
-    "title" : "Afromenco",
-    "artist" : "Marc Antoine",
-    "year" : 2003,
-    "album" : "Mediterraneo"
+    "artwork" : "Albumartworks.files/082.png"
   },
   {
-    "artwork" : "Albumartworks.files/083.png",
-    "genre" : "レゲエ",
-    "compactArtwork" : "Albumartworks.files/083-compact.png",
-    "title" : "Ketchy Shuby",
-    "artist" : "Peter Tosh",
-    "year" : 2003,
-    "album" : "The Essential Peter Tosh (The Columbia Years)"
+    "artwork" : "Albumartworks.files/083.png"
   },
   {
-    "artwork" : "Albumartworks.files/084.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks.files/084-compact.png",
-    "title" : "A Brighter Day",
-    "artist" : "The Doobie Brothers",
-    "year" : 2010,
-    "album" : "World Gone Crazy"
+    "artwork" : "Albumartworks.files/084.png"
   },
   {
-    "artwork" : "Albumartworks.files/085.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks.files/085-compact.png",
-    "title" : "Tropicalia",
-    "artist" : "Beck",
-    "year" : 1998,
-    "album" : "Mutations"
+    "artwork" : "Albumartworks.files/085.png"
   },
   {
-    "artwork" : "Albumartworks.files/086.png",
-    "genre" : "Latino",
-    "compactArtwork" : "Albumartworks.files/086-compact.png",
-    "title" : "Só Danço Samba (Brasil Aperitive Music)",
-    "artist" : "Gilson Silveira & Roberto Taufic",
-    "year" : 2012,
-    "album" : "Brazilian Dinner: A Saturday Night Party In Brazil (Jantar Brasileiro)"
+    "artwork" : "Albumartworks.files/086.png"
   },
   {
-    "artwork" : "Albumartworks.files/087.png",
-    "genre" : "ポップ",
-    "compactArtwork" : "Albumartworks.files/087-compact.png",
-    "title" : "Barometer Soup",
-    "artist" : "Jimmy Buffett",
-    "year" : 1995,
-    "album" : "Barometer Soup"
+    "artwork" : "Albumartworks.files/087.png"
   },
   {
-    "artwork" : "Albumartworks.files/088.png",
-    "genre" : "ジャズ",
-    "compactArtwork" : "Albumartworks.files/088-compact.png",
-    "title" : "Kaya",
-    "artist" : "Monty Alexander",
-    "year" : 1999,
-    "album" : "Stir It Up"
+    "artwork" : "Albumartworks.files/088.png"
   },
   {
-    "artwork" : "Albumartworks.files/089.png",
-    "genre" : "ワールド",
-    "compactArtwork" : "Albumartworks.files/089-compact.png",
-    "title" : "August Day Song - Sound-a-like Cover",
-    "artist" : "Bebel Gilberto",
-    "year" : 2006,
-    "album" : "Best of Bossa Nova, Pt. 1"
+    "artwork" : "Albumartworks.files/089.png"
   },
   {
-    "artwork" : "Albumartworks.files/090.png",
-    "genre" : "ジャズ",
-    "compactArtwork" : "Albumartworks.files/090-compact.png",
-    "title" : "Woman In the Waves",
-    "artist" : "Michael Franks",
-    "year" : 1990,
-    "album" : "Blue Pacific"
+    "artwork" : "Albumartworks.files/090.png"
   },
   {
-    "artwork" : "Albumartworks.files/091.png",
-    "genre" : "レゲエ",
-    "compactArtwork" : "Albumartworks.files/091-compact.png",
-    "title" : "Is This Love",
-    "artist" : "Bob Marley & The Wailers",
-    "year" : 2005,
-    "album" : "アフリカ・ユナイト~シングル・コレクション"
+    "artwork" : "Albumartworks.files/091.png"
   },
   {
-    "artwork" : "Albumartworks.files/092.png",
-    "genre" : "ラテンジャズ",
-    "compactArtwork" : "Albumartworks.files/092-compact.png",
-    "title" : "Agua de Beber",
-    "artist" : "Manfredo Fest",
-    "year" : 2002,
-    "album" : "Shades of Jobim"
+    "artwork" : "Albumartworks.files/092.png"
   },
   {
-    "artwork" : "Albumartworks.files/093.png",
-    "genre" : "ジャズ",
-    "compactArtwork" : "Albumartworks.files/093-compact.png",
-    "title" : "DEEP IN YOUR MIND Feat. Victor Davies",
-    "artist" : "Kyoto Jazz Massive",
-    "year" : 2002,
-    "album" : "SPIRIT OF SUN"
+    "artwork" : "Albumartworks.files/093.png"
   },
   {
-    "artwork" : "Albumartworks.files/094.png",
-    "genre" : "ワールド",
-    "compactArtwork" : "Albumartworks.files/094-compact.png",
-    "title" : "Batoumambe",
-    "artist" : "Habib Koité & Bamada",
-    "year" : 2001,
-    "album" : "Baro"
+    "artwork" : "Albumartworks.files/094.png"
   },
   {
-    "artwork" : "Albumartworks.files/071.png",
-    "genre" : "ジャズ",
-    "compactArtwork" : "Albumartworks.files/071-compact.png",
-    "title" : "Corcovado (Quiet Nights Of Quiet Stars) [1963]",
-    "artist" : "Antônio Carlos Jobim, Astrud Gilberto, João Gilberto & Stan Getz",
-    "year" : 1997,
-    "album" : "Getz / Gilberto"
+    "artwork" : "Albumartworks.files/071.png"
   },
   {
-    "artwork" : "Albumartworks.files/096.png",
-    "genre" : "ダンス",
-    "compactArtwork" : "Albumartworks.files/096-compact.png",
-    "title" : "Guanabara",
-    "artist" : "Bossacucanova & Roberto Menescal",
-    "year" : 2001,
-    "album" : "Brasilidade"
+    "artwork" : "Albumartworks.files/096.png"
   },
   {
-    "artwork" : "Albumartworks.files/097.png",
-    "genre" : "New Age",
-    "compactArtwork" : "Albumartworks.files/097-compact.png",
-    "title" : "A Different Kind of Freedom",
-    "artist" : "Acoustic Alchemy",
-    "year" : 1994,
-    "album" : "Against the Grain"
+    "artwork" : "Albumartworks.files/097.png"
   },
   {
-    "artwork" : "Albumartworks.files/098.png",
-    "genre" : "Latino",
-    "compactArtwork" : "Albumartworks.files/098-compact.png",
-    "title" : "Bem Bom",
-    "artist" : "Gal Costa",
-    "year" : 2011,
-    "album" : "Grandes Vozes do Brasil. Um e Dois"
+    "artwork" : "Albumartworks.files/098.png"
   },
   {
-    "artwork" : "Albumartworks.files/099.png",
-    "genre" : "サンバ",
-    "compactArtwork" : "Albumartworks.files/099-compact.png",
-    "title" : "アキ・オー!",
-    "artist" : "トニーニョ・オルタ",
-    "year" : 2003,
-    "album" : "フレスカ・サンバ!"
+    "artwork" : "Albumartworks.files/099.png"
   },
   {
-    "artwork" : "Albumartworks.files/100.png",
-    "artist" : "William Orbit",
-    "album" : "Strange Cargo",
-    "year" : 1987,
-    "compactArtwork" : "Albumartworks.files/100-compact.png",
-    "genre" : "エレクトロニック",
-    "title" : "Via Caliente"
+    "artwork" : "Albumartworks.files/100.png"
   }
 ]
