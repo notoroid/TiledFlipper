@@ -1,902 +1,302 @@
 [
   {
-    "album" : "96 Degrees in the Shade",
-    "artwork" : "Albumartworks2.files/101.png",
-    "title" : "1865 (96º in the Shade)",
-    "artist" : "Third World",
-    "year" : 1977,
-    "compactArtwork" : "Albumartworks2.files/101-compact.png",
-    "genre" : "レゲエ"
+    "artwork" : "Albumartworks2.files/101.png"
   },
   {
-    "album" : "ジャズ・クラブ~ジャンピン・オン・サンセット",
-    "artwork" : "Albumartworks2.files/102.png",
-    "title" : "Bumpin' On Sunset",
-    "artist" : "Wes Montgomery",
-    "year" : 2007,
-    "compactArtwork" : "Albumartworks2.files/102-compact.png",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/102.png"
   },
   {
-    "album" : "Gold",
-    "artwork" : "Albumartworks2.files/103.png",
-    "title" : "New York, New York",
-    "artist" : "Ryan Adams",
-    "year" : 2001,
-    "compactArtwork" : "Albumartworks2.files/103-compact.png",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks2.files/103.png"
   },
   {
-    "album" : "The Very Best of Spyro Gyra",
-    "artwork" : "Albumartworks2.files/104.png",
-    "title" : "Morning Dance (Live)",
-    "artist" : "Spyro Gyra",
-    "year" : 2002,
-    "compactArtwork" : "Albumartworks2.files/104-compact.png",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/104.png"
   },
   {
-    "artist" : "Raulin Rodriguez",
-    "year" : 1993,
-    "album" : "Una Mujer Como Tú",
-    "compactArtwork" : "Albumartworks2.files/105-compact.png",
-    "artwork" : "Albumartworks2.files/105.png",
-    "genre" : "サルサ/トロピカル",
-    "title" : "Mi Morenita"
+    "artwork" : "Albumartworks2.files/105.png"
   },
   {
-    "artist" : "Eleni Mandell",
-    "year" : 2012,
-    "album" : "I Can See the Future",
-    "compactArtwork" : "Albumartworks2.files/106-compact.png",
-    "artwork" : "Albumartworks2.files/106.png",
-    "genre" : "オルタナティブ",
-    "title" : "Magic Summertime"
+    "artwork" : "Albumartworks2.files/106.png"
   },
   {
-    "artist" : "Father John Misty",
-    "year" : 2012,
-    "album" : "Fear Fun",
-    "compactArtwork" : "Albumartworks2.files/107-compact.png",
-    "artwork" : "Albumartworks2.files/107.png",
-    "genre" : "オルタナティブ",
-    "title" : "Now I'm Learning to Love the War"
+    "artwork" : "Albumartworks2.files/107.png"
   },
   {
-    "artist" : "The Band",
-    "year" : 2000,
-    "album" : "The Band: Greatest Hits",
-    "compactArtwork" : "Albumartworks2.files/108-compact.png",
-    "artwork" : "Albumartworks2.files/108.png",
-    "genre" : "ロック",
-    "title" : "Stage Fright"
+    "artwork" : "Albumartworks2.files/108.png"
   },
   {
-    "year" : 2012,
-    "album" : "Bring It On Home (Deluxe Version)",
-    "genre" : "ポップ",
-    "artwork" : "Albumartworks2.files/109.png",
-    "title" : "I Don't Need No Doctor",
-    "artist" : "Joan Osborne",
-    "compactArtwork" : "Albumartworks2.files/109-compact.png"
+    "artwork" : "Albumartworks2.files/109.png"
   },
   {
-    "year" : 2012,
-    "album" : "Fear Fun",
-    "genre" : "オルタナティブ",
-    "artwork" : "Albumartworks2.files/107.png",
-    "title" : "Funtimes in Babylon",
-    "artist" : "Father John Misty",
-    "compactArtwork" : "Albumartworks2.files/107-compact.png"
+    "artwork" : "Albumartworks2.files/107.png"
   },
   {
-    "year" : 1967,
-    "album" : "Eydie Gorme The Best Songs",
-    "genre" : "ポップ",
-    "artwork" : "Albumartworks2.files/111.png",
-    "title" : "Fly Me To The Moon",
-    "artist" : "Eydie Gorme",
-    "compactArtwork" : "Albumartworks2.files/111-compact.png"
+    "artwork" : "Albumartworks2.files/111.png"
   },
   {
-    "year" : 2012,
-    "album" : "2 Degrees East - 3 Degrees West Remastered",
-    "genre" : "ジャズ",
-    "artwork" : "Albumartworks2.files/112.png",
-    "title" : "2 Degrees East - 3 Degrees West",
-    "artist" : "John Lewis, Percy Heath, Bill Perkins, Chico Hamilton & Jim Hall",
-    "compactArtwork" : "Albumartworks2.files/112-compact.png"
+    "artwork" : "Albumartworks2.files/112.png"
   },
   {
-    "year" : 2012,
-    "album" : "サーフ・ ガール・ミュージック",
-    "genre" : "ワールド",
-    "artwork" : "Albumartworks2.files/113.png",
-    "title" : "クロックス",
-    "artist" : "Island Sunset Sessions",
-    "compactArtwork" : "Albumartworks2.files/113-compact.png"
+    "artwork" : "Albumartworks2.files/113.png"
   },
   {
-    "year" : 1951,
-    "album" : "The Very Best of 10cc",
-    "genre" : "ロック",
-    "artwork" : "Albumartworks2.files/114.png",
-    "title" : "Dreadlock Holiday",
-    "artist" : "10CC",
-    "compactArtwork" : "Albumartworks2.files/114-compact.png"
+    "artwork" : "Albumartworks2.files/114.png"
   },
   {
-    "year" : 2011,
-    "album" : "Dynamic Jazz - Miles Davis : 53 Essential Tracks",
-    "genre" : "ジャズ",
-    "artwork" : "Albumartworks2.files/115.png",
-    "title" : "I Loves You, Porgy",
-    "artist" : "Miles Davis",
-    "compactArtwork" : "Albumartworks2.files/115-compact.png"
+    "artwork" : "Albumartworks2.files/115.png"
   },
   {
-    "artwork" : "Albumartworks2.files/116.png",
-    "artist" : "Willie Nelson & Wynton Marsalis",
-    "album" : "The Midnight Blues Standard Time, Vol. 5",
-    "year" : 1997,
-    "compactArtwork" : "Albumartworks2.files/116-compact.png",
-    "genre" : "ジャズ",
-    "title" : "Spring Will Be a Little Late This Year"
+    "artwork" : "Albumartworks2.files/116.png"
   },
   {
-    "artwork" : "Albumartworks2.files/117.png",
-    "artist" : "Stan Getz",
-    "album" : "Focus",
-    "year" : 1961,
-    "compactArtwork" : "Albumartworks2.files/117-compact.png",
-    "genre" : "ジャズ",
-    "title" : "A Summer Afternoon"
+    "artwork" : "Albumartworks2.files/117.png"
   },
   {
-    "artwork" : "Albumartworks2.files/118.png",
-    "artist" : "Clifford Brown & Max Roach",
-    "album" : "Clifford Brown with Strings",
-    "year" : 1955,
-    "compactArtwork" : "Albumartworks2.files/118-compact.png",
-    "genre" : "ジャズ",
-    "title" : "Blue Moon"
-  },
-  {
-    "artwork" : "Albumartworks2.files/119.png",
-    "artist" : "Miles Davis",
-    "album" : "100 (100 Original Tracks - Remastered)",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/119-compact.png",
-    "genre" : "ジャズ",
-    "title" : "Concierto de Aranjuez. Adagio"
-  },
-  {
-    "artwork" : "Albumartworks2.files/120.png",
-    "artist" : "Ellie Goulding",
-    "album" : "Bright Lights",
-    "year" : 2010,
-    "compactArtwork" : "Albumartworks2.files/120-compact.png",
-    "genre" : "ポップ",
-    "title" : "Your Song (Bonus Track)"
-  },
-  {
-    "artwork" : "Albumartworks2.files/121.png",
-    "artist" : "Cold Specks",
-    "album" : "I Predict a Graceful Expulsion",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/121-compact.png",
-    "genre" : "オルタナティブ",
-    "title" : "Hector"
-  },
-  {
-    "artwork" : "Albumartworks2.files/122.png",
-    "artist" : "Pearl and the Beard",
-    "album" : "Killing the Darlings",
-    "year" : 2011,
-    "compactArtwork" : "Albumartworks2.files/122-compact.png",
-    "genre" : "シンガーソングライター",
-    "title" : "Swimming"
-  },
-  {
-    "artwork" : "Albumartworks2.files/123.png",
-    "artist" : "Alabama Shakes",
-    "album" : "Boys & Girls",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/123-compact.png",
-    "genre" : "オルタナティブ",
-    "title" : "Hold On"
-  },
-  {
-    "artwork" : "Albumartworks2.files/124.png",
-    "artist" : "Dido",
-    "album" : "No Angel",
-    "year" : 1999,
-    "compactArtwork" : "Albumartworks2.files/124-compact.png",
-    "genre" : "ポップ",
-    "title" : "Thank You"
-  },
-  {
-    "artwork" : "Albumartworks2.files/125.png",
-    "artist" : "The Little Willies",
-    "album" : "For the Good Times",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/125-compact.png",
-    "genre" : "カントリー",
-    "title" : "Jolene"
-  },
-  {
-    "artwork" : "Albumartworks2.files/126.png",
-    "artist" : "John Mayer",
-    "album" : "Born and Raised",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/126-compact.png",
-    "genre" : "ロック",
-    "title" : "Queen of California"
-  },
-  {
-    "artwork" : "Albumartworks2.files/127.png",
-    "artist" : "Jon and Roy",
-    "album" : "Let It Go",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/127-compact.png",
-    "genre" : "シンガーソングライター",
-    "title" : "Mountain Town"
-  },
-  {
-    "artwork" : "Albumartworks2.files/128.png",
-    "artist" : "Nouela",
-    "album" : "Chants",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/128-compact.png",
-    "genre" : "オルタナティブ",
-    "title" : "Regrets"
-  },
-  {
-    "artwork" : "Albumartworks2.files/129.png",
-    "artist" : "Feist",
-    "album" : "Let It Die",
-    "year" : 2004,
-    "compactArtwork" : "Albumartworks2.files/129-compact.png",
-    "genre" : "ロック",
-    "title" : "Inside and Out"
-  },
-  {
-    "artwork" : "Albumartworks2.files/130.png",
-    "artist" : "Ed Sheeran",
-    "album" : "+",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/130-compact.png",
-    "genre" : "シンガーソングライター",
-    "title" : "Little Bird (Deluxe Edition)"
-  },
-  {
-    "artwork" : "Albumartworks2.files/131.png",
-    "artist" : "Patrick Watson",
-    "album" : "Adventures In Your Own Backyard",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/131-compact.png",
-    "genre" : "オルタナティブ",
-    "title" : "Into Giants"
-  },
-  {
-    "artwork" : "Albumartworks2.files/132.png",
-    "artist" : "The New Pornographers",
-    "album" : "Just Tell Me That You Want Me: A Tribute To Fleetwood Mac",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/132-compact.png",
-    "genre" : "ポップ",
-    "title" : "Think About Me"
-  },
-  {
-    "artwork" : "Albumartworks2.files/133.png",
-    "artist" : "Melody Gardot",
-    "album" : "The Absence",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/133-compact.png",
-    "genre" : "ポップ",
-    "title" : "Amalia"
-  },
-  {
-    "artwork" : "Albumartworks2.files/134.png",
-    "artist" : "Charlie Parker",
-    "album" : "Charlie Parker With Strings - The Master Takes",
-    "year" : 1995,
-    "compactArtwork" : "Albumartworks2.files/134-compact.png",
-    "genre" : "ジャズ",
-    "title" : "April In Paris"
-  },
-  {
-    "artwork" : "Albumartworks2.files/135.png",
-    "artist" : "Charlie Byrd",
-    "album" : "Charlie Byrd Plays Jobim",
-    "year" : 2002,
-    "compactArtwork" : "Albumartworks2.files/135-compact.png",
-    "genre" : "ラテンジャズ",
-    "title" : "Meditation"
-  },
-  {
-    "artwork" : "Albumartworks2.files/136.png",
-    "artist" : "Archives",
-    "album" : "Archives",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/136-compact.png",
-    "genre" : "レゲエ",
-    "title" : "Why Can't We Live Together? (feat. Lenny Kurlou)"
-  },
-  {
-    "title" : "If I Ever Get Around to Living",
-    "album" : "Born and Raised",
-    "artist" : "John Mayer",
-    "compactArtwork" : "Albumartworks2.files/126-compact.png",
-    "year" : 2012,
-    "genre" : "ロック",
-    "artwork" : "Albumartworks2.files/126.png"
-  },
-  {
-    "title" : "Rhiannon",
-    "album" : "Just Tell Me That You Want Me: A Tribute To Fleetwood Mac",
-    "artist" : "Best Coast",
-    "compactArtwork" : "Albumartworks2.files/132-compact.png",
-    "year" : 2012,
-    "genre" : "ポップ",
-    "artwork" : "Albumartworks2.files/132.png"
-  },
-  {
-    "title" : "Landslide",
-    "album" : "Just Tell Me That You Want Me: A Tribute To Fleetwood Mac",
-    "artist" : "Antony",
-    "compactArtwork" : "Albumartworks2.files/132-compact.png",
-    "year" : 2012,
-    "genre" : "ポップ",
-    "artwork" : "Albumartworks2.files/132.png"
-  },
-  {
-    "title" : "Lost In My Mind",
-    "album" : "The Head and the Heart",
-    "artist" : "The Head and the Heart",
-    "compactArtwork" : "Albumartworks2.files/140-compact.png",
-    "year" : 2011,
-    "genre" : "オルタナティブ",
-    "artwork" : "Albumartworks2.files/140.png"
-  },
-  {
-    "title" : "All the Pretty Horses",
-    "album" : "At the Crossroads: A Benefit for Homeless Youth",
-    "artist" : "Calexico",
-    "compactArtwork" : "Albumartworks2.files/141-compact.png",
-    "year" : 2006,
-    "genre" : "オルタナティブ",
-    "artwork" : "Albumartworks2.files/141.png"
-  },
-  {
-    "title" : "Buckets Of Rain",
-    "album" : "FestivaLink presents Danny Schmidt at Kerrville Wine & Music Festival, TX 9/2/11",
-    "artist" : "Danny Schmidt",
-    "compactArtwork" : "Albumartworks2.files/142-compact.png",
-    "year" : 2011,
-    "genre" : "シンガーソングライター",
-    "artwork" : "Albumartworks2.files/142.png"
-  },
-  {
-    "title" : "I'll Get Along",
-    "album" : "Home Again (Deluxe Version)",
-    "artist" : "Michael Kiwanuka",
-    "compactArtwork" : "Albumartworks2.files/143-compact.png",
-    "year" : 2012,
-    "genre" : "R&B／ソウル",
-    "artwork" : "Albumartworks2.files/143.png"
-  },
-  {
-    "title" : "Make You Feel My Love",
-    "album" : "19",
-    "artist" : "ADELE",
-    "compactArtwork" : "Albumartworks2.files/144-compact.png",
-    "year" : 2008,
-    "genre" : "ポップ",
-    "artwork" : "Albumartworks2.files/144.png"
-  },
-  {
-    "title" : "Save Room",
-    "album" : "Once Again",
-    "artist" : "John Legend",
-    "compactArtwork" : "Albumartworks2.files/145-compact.png",
-    "year" : 2007,
-    "genre" : "R&B／ソウル",
-    "artwork" : "Albumartworks2.files/145.png"
-  },
-  {
-    "title" : "Michigan",
-    "album" : "Prologue",
-    "artist" : "The Milk Carton Kids",
-    "compactArtwork" : "Albumartworks2.files/146-compact.png",
-    "year" : 2011,
-    "genre" : "シンガーソングライター",
-    "artwork" : "Albumartworks2.files/146.png"
-  },
-  {
-    "title" : "Down By the Water",
-    "album" : "The King Is Dead",
-    "artist" : "The Decemberists",
-    "compactArtwork" : "Albumartworks2.files/147-compact.png",
-    "year" : 2011,
-    "genre" : "オルタナティブ",
-    "artwork" : "Albumartworks2.files/147.png"
-  },
-  {
-    "title" : "Blackbird",
-    "album" : "The Bottom Line Encore Collection",
-    "artist" : "Kenny Rankin",
-    "compactArtwork" : "Albumartworks2.files/148-compact.png",
-    "year" : 1999,
-    "genre" : "シンガーソングライター",
-    "artwork" : "Albumartworks2.files/148.png"
-  },
-  {
-    "title" : "Kathy's Song",
-    "album" : "Simply Eva",
-    "artist" : "Eva Cassidy",
-    "compactArtwork" : "Albumartworks2.files/149-compact.png",
-    "year" : 2011,
-    "genre" : "シンガーソングライター",
-    "artwork" : "Albumartworks2.files/149.png"
-  },
-  {
-    "title" : "Clarity",
-    "album" : "Heavier Things",
-    "artist" : "John Mayer",
-    "compactArtwork" : "Albumartworks2.files/150-compact.png",
-    "year" : 2003,
-    "genre" : "ロック",
-    "artwork" : "Albumartworks2.files/150.png"
-  },
-  {
-    "title" : "On Trees and Birds and Fire",
-    "album" : "On Trees and Birds and Fire - Single",
-    "artist" : "I Am Oak",
-    "compactArtwork" : "Albumartworks2.files/151-compact.png",
-    "year" : 2010,
-    "genre" : "シンガーソングライター",
-    "artwork" : "Albumartworks2.files/151.png"
-  },
-  {
-    "title" : "Triste",
-    "album" : "Take Love Easy",
-    "artist" : "Sophie Milman",
-    "compactArtwork" : "Albumartworks2.files/152-compact.png",
-    "year" : 2009,
-    "genre" : "ジャズ",
-    "artwork" : "Albumartworks2.files/152.png"
-  },
-  {
-    "title" : "Yesterdays",
-    "album" : "Clifford Brown with Strings",
-    "artist" : "Clifford Brown & Max Roach",
-    "compactArtwork" : "Albumartworks2.files/118-compact.png",
-    "year" : 1998,
-    "genre" : "ジャズ",
     "artwork" : "Albumartworks2.files/118.png"
   },
   {
-    "title" : "Ragged Wood",
-    "album" : "Fleet Foxes + Sun Giant EP (フリート フォクシーズ プラス サン ジャイアント EP)",
-    "artist" : "Fleet Foxes",
-    "compactArtwork" : "Albumartworks2.files/154-compact.png",
-    "year" : 2009,
-    "genre" : "オルタナティブ",
-    "artwork" : "Albumartworks2.files/154.png"
+    "artwork" : "Albumartworks2.files/119.png"
   },
   {
-    "title" : "My One and Only Love",
-    "album" : "Take Love Easy",
-    "artist" : "Sophie Milman",
-    "compactArtwork" : "Albumartworks2.files/152-compact.png",
-    "year" : 2009,
-    "genre" : "ジャズ",
+    "artwork" : "Albumartworks2.files/120.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/121.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/122.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/123.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/124.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/125.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/126.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/127.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/128.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/129.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/130.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/131.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/132.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/133.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/134.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/135.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/136.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/126.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/132.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/132.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/140.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/141.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/142.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/143.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/144.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/145.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/146.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/147.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/148.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/149.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/150.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/151.png"
+  },
+  {
     "artwork" : "Albumartworks2.files/152.png"
   },
   {
-    "title" : "I'll Fly Away",
-    "album" : "「オー・ブラザー!」オリジナル・サウンドトラック",
-    "artist" : "Alison Krauss & Gillian Welch",
-    "compactArtwork" : "Albumartworks2.files/156-compact.png",
-    "year" : 2000,
-    "genre" : "サウンドトラック",
+    "artwork" : "Albumartworks2.files/118.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/154.png"
+  },
+  {
+    "artwork" : "Albumartworks2.files/152.png"
+  },
+  {
     "artwork" : "Albumartworks2.files/156.png"
   },
   {
-    "title" : "Lay Your Heartbreak",
-    "album" : "The Light Divides",
-    "artist" : "Winterpills",
-    "compactArtwork" : "Albumartworks2.files/157-compact.png",
-    "year" : 2007,
-    "genre" : "ロック",
     "artwork" : "Albumartworks2.files/157.png"
   },
   {
-    "artwork" : "Albumartworks2.files/158.png",
-    "genre" : "ポップ",
-    "compactArtwork" : "Albumartworks2.files/158-compact.png",
-    "title" : "White Bird",
-    "artist" : "KT Tunstall",
-    "year" : 2007,
-    "album" : "Drastic Fantastic"
+    "artwork" : "Albumartworks2.files/158.png"
   },
   {
-    "artwork" : "Albumartworks2.files/159.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/159-compact.png",
-    "title" : "Maybe I'm Amazed",
-    "artist" : "Paul McCartney",
-    "year" : 2001,
-    "album" : "Wingspan - Hits and History"
+    "artwork" : "Albumartworks2.files/159.png"
   },
   {
-    "artwork" : "Albumartworks2.files/160.png",
-    "genre" : "チルドレン・ミュージック",
-    "compactArtwork" : "Albumartworks2.files/160-compact.png",
-    "title" : "5 Years Time",
-    "artist" : "Noah & The Whale",
-    "year" : 2009,
-    "album" : "Kids Sing Along Pac"
+    "artwork" : "Albumartworks2.files/160.png"
   },
   {
-    "artwork" : "Albumartworks2.files/161.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/161-compact.png",
-    "title" : "Cigarettes and Chocolate Milk",
-    "artist" : "Rufus Wainwright",
-    "year" : 2001,
-    "album" : "Poses"
+    "artwork" : "Albumartworks2.files/161.png"
   },
   {
-    "artwork" : "Albumartworks2.files/162.png",
-    "genre" : "ダウンテンポ",
-    "compactArtwork" : "Albumartworks2.files/162-compact.png",
-    "title" : "The Rain (Where Do I Begin?)",
-    "artist" : "Si*Sé",
-    "year" : 2007,
-    "album" : "Si*Sé"
+    "artwork" : "Albumartworks2.files/162.png"
   },
   {
-    "artwork" : "Albumartworks2.files/163.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks2.files/163-compact.png",
-    "title" : "Weird Divide",
-    "artist" : "The Shins",
-    "year" : 2001,
-    "album" : "Oh, Inverted World"
+    "artwork" : "Albumartworks2.files/163.png"
   },
   {
-    "artwork" : "Albumartworks2.files/164.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks2.files/164-compact.png",
-    "title" : "Hallelujah",
-    "artist" : "Jeff Buckley",
-    "year" : 1994,
-    "album" : "Grace"
+    "artwork" : "Albumartworks2.files/164.png"
   },
   {
-    "artwork" : "Albumartworks2.files/165.png",
-    "genre" : "ポップ",
-    "compactArtwork" : "Albumartworks2.files/165-compact.png",
-    "title" : "Chains",
-    "artist" : "Abigail Washburn",
-    "year" : 2011,
-    "album" : "City of Refuge"
+    "artwork" : "Albumartworks2.files/165.png"
   },
   {
-    "artwork" : "Albumartworks2.files/166.png",
-    "genre" : "シンガーソングライター",
-    "compactArtwork" : "Albumartworks2.files/166-compact.png",
-    "title" : "Please Read the Letter",
-    "artist" : "Robert Plant & Alison Krauss",
-    "year" : 2007,
-    "album" : "Raising Sand (Bonus Track Version)"
+    "artwork" : "Albumartworks2.files/166.png"
   },
   {
-    "artwork" : "Albumartworks2.files/167.png",
-    "genre" : "R&B／ソウル",
-    "compactArtwork" : "Albumartworks2.files/167-compact.png",
-    "title" : "Golden Lady",
-    "artist" : "Stevie Wonder",
-    "year" : 1973,
-    "album" : "Innervisions (Remastered)"
+    "artwork" : "Albumartworks2.files/167.png"
   },
   {
-    "artwork" : "Albumartworks2.files/168.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks2.files/168-compact.png",
-    "title" : "Autumn Tree",
-    "artist" : "Milo Greene",
-    "year" : 2012,
-    "album" : "Milo Greene"
+    "artwork" : "Albumartworks2.files/168.png"
   },
   {
-    "artwork" : "Albumartworks2.files/169.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/169-compact.png",
-    "title" : "Fall At Your Feet",
-    "artist" : "Crowded House",
-    "year" : 2010,
-    "album" : "The Very Very Best of Crowded House"
+    "artwork" : "Albumartworks2.files/169.png"
   },
   {
-    "artwork" : "Albumartworks2.files/170.png",
-    "genre" : "シンガーソングライター",
-    "compactArtwork" : "Albumartworks2.files/170-compact.png",
-    "title" : "I Play Music",
-    "artist" : "Rosie Thomas",
-    "year" : 2003,
-    "album" : "Only With Laughter Can You Win"
+    "artwork" : "Albumartworks2.files/170.png"
   },
   {
-    "artwork" : "Albumartworks2.files/171.png",
-    "genre" : "エレクトロニック",
-    "compactArtwork" : "Albumartworks2.files/171-compact.png",
-    "title" : "I Melt With You",
-    "artist" : "Nouvelle Vague",
-    "year" : 2004,
-    "album" : "Nouvelle Vague"
+    "artwork" : "Albumartworks2.files/171.png"
   },
   {
-    "artwork" : "Albumartworks2.files/172.png",
-    "genre" : "R&B／ソウル",
-    "compactArtwork" : "Albumartworks2.files/172-compact.png",
-    "title" : "Put Your Records On",
-    "artist" : "Corinne Bailey Rae",
-    "year" : 2006,
-    "album" : "Corinne Bailey Rae"
+    "artwork" : "Albumartworks2.files/172.png"
   },
   {
-    "artwork" : "Albumartworks2.files/173.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/173-compact.png",
-    "title" : "Out In the Woods",
-    "artist" : "Leon Russell",
-    "year" : 2011,
-    "album" : "The Best of Leon Russell"
+    "artwork" : "Albumartworks2.files/173.png"
   },
   {
-    "artwork" : "Albumartworks2.files/174.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/174-compact.png",
-    "title" : "When the Night Was Young",
-    "artist" : "Robbie Robertson",
-    "year" : 2011,
-    "album" : "How to Become Clairvoyant (Bonus Track Edition)"
+    "artwork" : "Albumartworks2.files/174.png"
   },
   {
-    "artwork" : "Albumartworks2.files/175.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks2.files/175-compact.png",
-    "title" : "In the Hearts of Men",
-    "artist" : "First Aid Kit",
-    "year" : 2012,
-    "album" : "The Lion's Roar"
+    "artwork" : "Albumartworks2.files/175.png"
   },
   {
-    "artwork" : "Albumartworks2.files/176.png",
-    "genre" : "オルタナティブ",
-    "compactArtwork" : "Albumartworks2.files/176-compact.png",
-    "title" : "Taxi Cab",
-    "artist" : "Tracey Thorn",
-    "year" : 2010,
-    "album" : "Oh, the Divorces! - Single"
+    "artwork" : "Albumartworks2.files/176.png"
   },
   {
-    "artwork" : "Albumartworks2.files/177.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/177-compact.png",
-    "title" : "Faster Than Cars Drive",
-    "artist" : "Kate Tucker & The Sons of Sweden",
-    "year" : 2003,
-    "album" : "Kate Tucker & the Sons of Sweden"
+    "artwork" : "Albumartworks2.files/177.png"
   },
   {
-    "artwork" : "Albumartworks2.files/178.png",
-    "genre" : "ロック",
-    "compactArtwork" : "Albumartworks2.files/178-compact.png",
-    "title" : "The Lake",
-    "artist" : "Clare and the Reasons",
-    "year" : 2012,
-    "album" : "KR-51"
+    "artwork" : "Albumartworks2.files/178.png"
   },
   {
-    "artist" : "Lizz Wright",
-    "artwork" : "Albumartworks2.files/179.png",
-    "album" : "Salt",
-    "year" : 2003,
-    "compactArtwork" : "Albumartworks2.files/179-compact.png",
-    "title" : "Afro-Blue",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/179.png"
   },
   {
-    "artist" : "Sarah Vaughan",
-    "artwork" : "Albumartworks2.files/180.png",
-    "album" : "Sarah Sings Broadway Vol. 2",
-    "year" : 2009,
-    "compactArtwork" : "Albumartworks2.files/180-compact.png",
-    "title" : "Comes Love (From Yokel Boy)",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/180.png"
   },
   {
-    "artist" : "Susanna Hoffs",
-    "artwork" : "Albumartworks2.files/181.png",
-    "album" : "Someday",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/181-compact.png",
-    "title" : "Picture Me",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/181.png"
   },
   {
-    "artist" : "Van Morrison",
-    "artwork" : "Albumartworks2.files/182.png",
-    "album" : "Moondance",
-    "year" : 1970,
-    "compactArtwork" : "Albumartworks2.files/182-compact.png",
-    "title" : "These Dreams of You",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks2.files/182.png"
   },
   {
-    "artist" : "Eva Cassidy",
-    "artwork" : "Albumartworks2.files/149.png",
-    "album" : "Simply Eva",
-    "year" : 2011,
-    "compactArtwork" : "Albumartworks2.files/149-compact.png",
-    "title" : "Autumn Leaves",
-    "genre" : "シンガーソングライター"
+    "artwork" : "Albumartworks2.files/149.png"
   },
   {
-    "artist" : "Bebel Gilberto",
-    "artwork" : "Albumartworks2.files/184.png",
-    "album" : "Momento (モメント)",
-    "year" : 2007,
-    "compactArtwork" : "Albumartworks2.files/184-compact.png",
-    "title" : "Night and Day",
-    "genre" : "ワールド"
+    "artwork" : "Albumartworks2.files/184.png"
   },
   {
-    "artist" : "Bobby Hutcherson",
-    "artwork" : "Albumartworks2.files/185.png",
-    "album" : "Components",
-    "year" : 1994,
-    "compactArtwork" : "Albumartworks2.files/185-compact.png",
-    "title" : "Little B's Poem",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/185.png"
   },
   {
-    "artist" : "The Swell Season",
-    "artwork" : "Albumartworks2.files/186.png",
-    "album" : "Strict Joy",
-    "year" : 2009,
-    "compactArtwork" : "Albumartworks2.files/186-compact.png",
-    "title" : "High Horses",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/186.png"
   },
   {
-    "artist" : "Villagers",
-    "artwork" : "Albumartworks2.files/187.png",
-    "album" : "Becoming a Jackal",
-    "year" : 2010,
-    "compactArtwork" : "Albumartworks2.files/187-compact.png",
-    "title" : "Twenty Seven Strangers",
-    "genre" : "オルタナティブ"
+    "artwork" : "Albumartworks2.files/187.png"
   },
   {
-    "artist" : "Dido",
-    "artwork" : "Albumartworks2.files/124.png",
-    "album" : "No Angel",
-    "year" : 1999,
-    "compactArtwork" : "Albumartworks2.files/124-compact.png",
-    "title" : "Here With Me",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/124.png"
   },
   {
-    "artist" : "My Morning Jacket",
-    "artwork" : "Albumartworks2.files/189.png",
-    "album" : "Chimes of Freedom - The Songs of Bob Dylan (Honoring 50 Years of Amnesty International)",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/189-compact.png",
-    "title" : "You're a Big Girl Now",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks2.files/189.png"
   },
   {
-    "artist" : "Rosemary Clooney",
-    "artwork" : "Albumartworks2.files/190.png",
-    "album" : "75 Golden Oldies",
-    "year" : 2008,
-    "compactArtwork" : "Albumartworks2.files/190-compact.png",
-    "title" : "Hey There",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/190.png"
   },
   {
-    "artist" : "Ray Charles",
-    "artwork" : "Albumartworks2.files/191.png",
-    "album" : "Genius Loves Company (ジーニアス・ラヴ ~永遠の愛)",
-    "year" : 2004,
-    "compactArtwork" : "Albumartworks2.files/191-compact.png",
-    "title" : "Do I Ever Cross Your Mind? (With Bonnie Raitt)",
-    "genre" : "R&B／ソウル"
+    "artwork" : "Albumartworks2.files/191.png"
   },
   {
-    "artist" : "George Benson",
-    "artwork" : "Albumartworks2.files/192.png",
-    "album" : "Breezin'",
-    "year" : 2001,
-    "compactArtwork" : "Albumartworks2.files/192-compact.png",
-    "title" : "This Masquerade",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/192.png"
   },
   {
-    "artist" : "The Modern Jazz Quartet",
-    "artwork" : "Albumartworks2.files/193.png",
-    "album" : "Django (Rudy van Gelder Remaster)",
-    "year" : 2006,
-    "compactArtwork" : "Albumartworks2.files/193-compact.png",
-    "title" : "Milano",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/193.png"
   },
   {
-    "artist" : "Kenny Clarke",
-    "artwork" : "Albumartworks2.files/194.png",
-    "album" : "Kenny Clarke - Volume 10",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/194-compact.png",
-    "title" : "Milano (feat. Milt Jackson, John Lewis, Percy Heath)",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/194.png"
   },
   {
-    "artist" : "Nat \"King\" Cole",
-    "artwork" : "Albumartworks2.files/195.png",
-    "album" : "All the Things You Are - the Love Song Collection",
-    "year" : 2005,
-    "compactArtwork" : "Albumartworks2.files/195-compact.png",
-    "title" : "I Loved You(For Sentimental Reasons)",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/195.png"
   },
   {
-    "artist" : "Crosby, Stills & Nash",
-    "artwork" : "Albumartworks2.files/196.png",
-    "album" : "Crosby, Stills & Nash (Bonus Track Version) [Remastered]",
-    "year" : 2006,
-    "compactArtwork" : "Albumartworks2.files/196-compact.png",
-    "title" : "Guinnevere",
-    "genre" : "ロック"
+    "artwork" : "Albumartworks2.files/196.png"
   },
   {
-    "artist" : "The Waterboys",
-    "artwork" : "Albumartworks2.files/197.png",
-    "album" : "Fisherman's Blues",
-    "year" : 2006,
-    "compactArtwork" : "Albumartworks2.files/197-compact.png",
-    "title" : "Fisherman's Blues",
-    "genre" : "ポップ"
+    "artwork" : "Albumartworks2.files/197.png"
   },
   {
-    "artist" : "Bill Evans Trio",
-    "artwork" : "Albumartworks2.files/198.png",
-    "album" : "Waltz for Debby",
-    "year" : 1987,
-    "compactArtwork" : "Albumartworks2.files/198-compact.png",
-    "title" : "My Foolish Heart",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/198.png"
   },
   {
-    "artist" : "Dave Brubeck Trio & The Dave Brubeck Trio",
-    "artwork" : "Albumartworks2.files/199.png",
-    "album" : "Alice in Wonderland (Jazz Collection) [Remastered]",
-    "year" : 2012,
-    "compactArtwork" : "Albumartworks2.files/199-compact.png",
-    "title" : "What Is This Thing Called Love",
-    "genre" : "ジャズ"
+    "artwork" : "Albumartworks2.files/199.png"
   },
   {
-    "album" : "Afternoon In Paris",
-    "genre" : "ジャズ",
-    "year" : 1971,
-    "artist" : "Stéphane Grappelli",
-    "artwork" : "Albumartworks2.files/200.png",
-    "compactArtwork" : "Albumartworks2.files/200-compact.png",
-    "title" : "Time After Time"
+    "artwork" : "Albumartworks2.files/200.png"
   }
 ]

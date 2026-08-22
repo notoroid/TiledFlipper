@@ -36,7 +36,7 @@ class TileFlipServcice {
             .init(
                 url: url,
                 name: "Online artwork",
-                revision: 3,
+                revision: 4,
                 uniqueIdentifier:"64dbd45b0eb7e01bb78db792c570a036dcdf49ef",
                 artworkListFile: "Albumartworks3.json"
             )
