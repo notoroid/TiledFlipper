@@ -1,0 +1,16 @@
+# Google Cloud Build でイメージをビルドして Artifact Registry へ push するための設定。
+#
+# ローカル (Apple Silicon) で `container build --arch amd64` を試すと、Swift の
+# コンパイルが Rosetta 上でクラッシュする (rosetta error: could not find free
+# space for allocation) ため、Cloud Run が要求する linux/amd64 イメージは
+# Cloud Build のネイティブ x86_64 マシン上でビルドする。
+#
+# 実行 (リポジトリルートから):
+#   gcloud builds submit Server --config Server/cloudbuild.yaml \
+#     --substitutions=_IMAGE=us-central1-docker.pkg.dev/<PROJECT_ID>/tiledflipper/tiledflipper-server:latest
+
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-f", "Containerfile", "-t", "${_IMAGE}", "."]
+images:
+  - "${_IMAGE}"

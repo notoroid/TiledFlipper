@@ -21,7 +21,7 @@
 FROM swift:6.3 AS builder
 
 WORKDIR /app
-COPY Package.swift Package.resolved .
+COPY Package.swift Package.resolved ./
 COPY Sources/ Sources/
 
 RUN swift build -c release --product TiledFlipperServer
