@@ -8,6 +8,11 @@
 #
 # 前提: `container system start` 済みであること (未起動なら自動で起動する)。
 # Package.swift / Sources を変えた後は毎回このスクリプトを実行し直せば良い。
+#
+# swift:6.3 は Apple Container (arm64 ネイティブ仮想化) 上で protoc-tool の
+# リンク直後にセグフォルトする不具合を確認しているため (Doc/AppleContainer.md
+# 参照)、ローカルビルドは swift:6.2 を使う。Google Cloud Build (cloudbuild.yaml)
+# 側は実績のある既定値 (6.3) のまま。
 
 set -euo pipefail
 
@@ -22,7 +27,7 @@ echo "== container system の起動を確認 =="
 container system start >/dev/null
 
 echo "== イメージをビルド =="
-container build -t "$IMAGE_NAME" -f Server/Containerfile Server
+container build --build-arg SWIFT_VERSION=6.2 -t "$IMAGE_NAME" -f Server/Containerfile Server
 
 echo "== 既存のコンテナを片付ける =="
 container rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true

@@ -1,9 +1,16 @@
 # TiledFlipper のローカルテストサーバーを Apple Container (`container` CLI) や
 # 一般的な OCI ランタイムでビルド・実行するための Containerfile。
 #
-# マルチステージビルド: `swift:6.3` でビルドし、`swift:6.3-slim` へ成果物だけ
-# コピーして実行する。将来 Google Cloud Run / AWS App Runner 等へそのまま
-# デプロイする場合も同じイメージを使い回せる。
+# マルチステージビルド: `swift:${SWIFT_VERSION}` でビルドし、
+# `swift:${SWIFT_VERSION}-slim` へ成果物だけコピーして実行する。将来
+# Google Cloud Run / AWS App Runner 等へそのままデプロイする場合も
+# 同じイメージを使い回せる。
+#
+# 既定は Google Cloud Build で実績のある 6.3。ローカルの Apple Container
+# (arm64 ネイティブ仮想化) では swift:6.3 が protoc-tool のリンク直後に
+# セグフォルトする不具合を確認しているため (Doc/AppleContainer.md 参照)、
+# ローカルでは 6.2 を使う: --build-arg SWIFT_VERSION=6.2
+# (Server/Tools/run-in-container.sh はこれを自動で渡す)
 #
 # ビルド (リポジトリルートから):
 #   container build -t tiledflipper-server -f Server/Containerfile Server
@@ -18,7 +25,9 @@
 #
 # まとめて行うなら Server/Scripts/run-in-container.sh を使う。
 
-FROM swift:6.3 AS builder
+ARG SWIFT_VERSION=6.3
+
+FROM swift:${SWIFT_VERSION} AS builder
 
 WORKDIR /app
 COPY Package.swift Package.resolved ./
@@ -27,7 +36,7 @@ COPY Sources/ Sources/
 RUN swift build -c release --product TiledFlipperServer
 RUN cp "$(swift build -c release --show-bin-path)/TiledFlipperServer" /usr/bin/TiledFlipperServer
 
-FROM swift:6.3-slim
+FROM swift:${SWIFT_VERSION}-slim
 
 COPY --from=builder /usr/bin/TiledFlipperServer /usr/bin/TiledFlipperServer
 
