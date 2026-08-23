@@ -17,6 +17,65 @@ Server/Tools/run-in-container.sh
 
 手で行う場合は [Containerfile](../Containerfile) の先頭コメントにビルド/実行コマンドを書いてある。
 
+## なぜ arm64 でビルドしているか (ローカル検証と Cloud Run 用ビルドの違い)
+
+このドキュメントで扱っている `container build` (アーキテクチャ指定なし、
+Apple Silicon 上では既定で arm64) は、**手元の Mac で
+TiledFlipperServer を動かし、iOS Simulator / 実機から接続できることを
+確かめるためのローカル動作検証**が目的。「macOS の Container Machine で
+ローカルテストサーバーを動かす」という、そもそもの目標そのものにあたる。
+
+これとは別に、[CloudRunDeployment.md](./CloudRunDeployment.md) で扱っている
+`linux/amd64` 向けのビルドは目的が異なる。Google Cloud Run が
+`linux/amd64` のイメージしか受け付けないため、Cloud Run にデプロイする
+イメージを用意する目的だけで行ったもの。`container build --arch amd64`
+でこの Mac 上からクロスビルドしようとしたところ Rosetta がクラッシュする
+問題に当たり (「7. `swift build` が `protoc-tool` のリンク直後に
+セグフォルトすることがある」の前段にあたる話)、amd64 向けはローカルでの
+クロスビルドを諦めて Google Cloud Build (GCP 側のネイティブ環境) に
+切り替えている。**つまり amd64 のビルドは現在ローカルの `container`
+コマンドを一切経由しておらず、ここで書いているハマりどころとは別系統。**
+
+ローカル (arm64) での「ビルドできるか」と「動かして繋がるか」は次のように
+切り分けている:
+
+- **接続検証**: Containerfile に `COPY Package.swift Package.resolved ./`
+  ([2 番目の変更](#containerfile-の書き換えの流れ)) までの版では、ローカル
+  arm64 ビルド → `container run` → `container inspect` で得た IP に
+  `curl`/iOS Simulator から接続、という一連の流れは成功していた。
+- **最新版の再検証**: `COPY ArtworkPackages.local.json ./`
+  ([3 番目の変更](#containerfile-の書き換えの流れ)) を加えた現在の版では、
+  ローカル arm64 ビルドがビルダー VM のリソースリセット・runc の
+  デッドロック・SwiftPM のセグフォルトと、毎回違う理由で完走せず、
+  接続検証まで到達できていない (2026-08-23 時点)。一方この版は
+  Google Cloud Build 経由でのビルドと Cloud Run へのデプロイ・疎通は
+  成功している。つまり「接続の仕組み」自体は疑わしくなく、疑わしいのは
+  「最新の Containerfile を Apple Container (arm64 ネイティブ) で
+  ビルドし切れるか」という一点に絞られている。
+
+## Containerfile の書き換えの流れ
+
+[Containerfile](../Containerfile) は環境ごとに複数のファイルを用意して
+いるわけではなく、1 本のファイルを目的に合わせて 3 段階で書き換えてきた。
+ローカル検証にも Cloud Run 向けビルドにも常に同じファイルを使っている
+(それが OCI 標準の Containerfile を使う狙いでもある)。
+
+1. `1d566e8` (2026-08-20) — 新規作成。`swift:6.3` でビルドし
+   `swift:6.3-slim` で実行するマルチステージ構成。ローカルの Apple
+   Container で動かすことだけを目的にしていた。
+2. `24548ff` (2026-08-22) — Cloud Build 対応。
+   `COPY Package.swift Package.resolved .` を `./` に変更。buildkit
+   (ローカルの Apple Container) では省略した書き方でも通っていたが、
+   Cloud Build 上の従来の docker ビルダーは「複数ファイルを COPY する
+   ときは宛先の末尾に `/` が要る」という点により厳密で、そのままでは
+   ビルドが落ちていた。
+3. `a5b4333` (2026-08-22) — Cloud Run 対応。`COPY ArtworkPackages.local.json
+   ./` を追加。Cloud Run にはローカルファイルを実行時にマウントする
+   仕組みが無く、ローカルの Apple Container で使っていた
+   `container run -v ... --catalog ...` 方式が使えないため、ビルド時点で
+   イメージへ焼き込む形に変えた (中身は配布 URL と版数だけで機微情報は
+   無いので焼き込んでも問題ないと判断した)。
+
 ## ハマった点
 
 ### 1. ビルド用 VM (`buildkit`) のリソースは初回作成時に固定される
@@ -126,6 +185,51 @@ Glibc の `stdout` グローバル変数が Darwin 側のような `Sendable` �
 全ストリームを flush する `fflush(nil)` に置き換えて解消した
 ([TiledFlipperTestServer.swift](../Sources/TiledFlipperServerCore/TiledFlipperTestServer.swift)、
 [main.swift](../Sources/TiledFlipperServer/main.swift))。
+
+### 7. `swift build` が `protoc-tool` のリンク直後にセグフォルトすることがある
+
+「2. ネストされた runc がまれにデッドロックする」の続報。ビルダー VM の
+CPU/メモリを 2 CPU/2GB → 4 CPU/6GB → 4 CPU/8GB と増やして何度か試したが、
+リソースを増やしても直らず、むしろ今回はクラッシュの中身まで捕まった。
+
+`grpc-swift-protobuf` が内部で使う `protoc-tool` のリンクが終わった
+直後 (`[298/299] Linking protoc-tool`) に、`swift-package` 自身が
+Signal 11 (セグメンテーション違反) で毎回ほぼ同じ場所 (経過 88〜95 秒
+あたり) で落ちる:
+
+```
+#10 88.34 [298/299] Linking protoc-tool
+#10 88.36
+#10 88.36 *** Signal 11: Backtracing from 0xffff9d2551b4... done ***
+#10 94.94
+#10 94.94 *** Program crashed: Bad pointer dereference at 0xfffffffffffffff0 ***
+#10 94.94
+#10 94.94 Platform: arm64 Linux (Ubuntu 24.04.4 LTS)
+#10 94.94
+#10 94.94 Thread 0 crashed:
+#10 94.94
+#10 94.94   0                         0x0000ffff9d2551b4 _swift_release_dealloc + 36 in libswiftCore.so
+#10 94.94   1 [ra]                    ... doDecrementSlow<(swift::PerformDeinit)1> ...
+#10 94.94   2 [ra] [system]           ... destroy for WriteAuxiliaryFile ... in swift-package
+#10 94.94   ...
+#10 94.94  11 [ra] [system]           ... LLBuildProgressTracker.deinit ... in swift-package
+```
+
+クラッシュ箇所は `LLBuildProgressTracker` や `BuildExecutionContext` の
+`deinit` (後片付けの参照カウント解放) の中で、実際のコンパイル作業が
+終わった後の掃除処理で起きている。メモリを増やしても再現したことから、
+リソース不足ではなく `swift:6.3` の Linux arm64 ツールチェーンと
+Apple Container の仮想化層の組み合わせにおける再現性の高いバグと見られる。
+クラッシュ後は buildkit がプロセスの終了を検知できず、「2.」と同じ
+ハングした状態になる。
+
+まだ確立した回避策は無い。試すなら:
+
+- `swift:6.2` や `swift:6.1` など別のツールチェーンで再現するか確認する
+- 何度かリトライする (完全に決定的ではなく、まれに素通りすることもある)
+- ローカルでの検証にこだわらず、[Google Cloud Build](./CloudRunDeployment.md)
+  のようなネイティブ x86_64/arm64 環境でのビルドに切り替える
+  (Cloud Build はこの問題と無関係にビルドできている)
 
 ## 参考: よく使うコマンド
 
