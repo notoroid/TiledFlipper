@@ -227,8 +227,12 @@ Apple Container の仮想化層の組み合わせにおける再現性の高い�
 `swift:6.2-slim` で同じ Containerfile ・同じ Sources を何度もビルドしたが、
 一度もセグフォルトしていない。しかも `swift:6.3` では 4 CPU/6GB や
 8GB でも落ちていたのに対し、`swift:6.2` では **ビルダー VM を
-2 CPU/4GB まで絞っても** 問題なく完走する (`Linking protoc-tool` を
-安定して通過する)。これは「メモリ不足」ではなく「`swift:6.3` の
+`container builder start` の既定値そのもの (2 CPU/2GB) まで絞っても**
+問題なく完走し、コンテナの起動・疎通確認まで通ることを確認した
+(`Linking protoc-tool` を安定して通過する)。「1.」で書いた
+「初回は 2GB だと実質メモリ不足になる」という話は `swift:6.3` +
+grpc-swift-protobuf の組み合わせ特有の話であり、`swift:6.2` では
+そもそも問題にならない。これは「メモリ不足」ではなく「`swift:6.3` の
 Linux arm64 ツールチェーン自体の不具合」だったことをさらに裏付けている。
 
 このリポジトリでは [Containerfile](../Containerfile) に
