@@ -223,13 +223,27 @@ Apple Container の仮想化層の組み合わせにおける再現性の高い�
 クラッシュ後は buildkit がプロセスの終了を検知できず、「2.」と同じ
 ハングした状態になる。
 
-まだ確立した回避策は無い。試すなら:
+**解決策: `swift:6.2` に切り替えたら再発しなくなった。** `swift:6.2` /
+`swift:6.2-slim` で同じ Containerfile ・同じ Sources を何度もビルドしたが、
+一度もセグフォルトしていない。しかも `swift:6.3` では 4 CPU/6GB や
+8GB でも落ちていたのに対し、`swift:6.2` では **ビルダー VM を
+2 CPU/4GB まで絞っても** 問題なく完走する (`Linking protoc-tool` を
+安定して通過する)。これは「メモリ不足」ではなく「`swift:6.3` の
+Linux arm64 ツールチェーン自体の不具合」だったことをさらに裏付けている。
 
-- `swift:6.2` や `swift:6.1` など別のツールチェーンで再現するか確認する
-- 何度かリトライする (完全に決定的ではなく、まれに素通りすることもある)
-- ローカルでの検証にこだわらず、[Google Cloud Build](./CloudRunDeployment.md)
-  のようなネイティブ x86_64/arm64 環境でのビルドに切り替える
-  (Cloud Build はこの問題と無関係にビルドできている)
+このリポジトリでは [Containerfile](../Containerfile) に
+`ARG SWIFT_VERSION` (既定 6.3) を用意し、
+[Server/Tools/run-in-container.sh](../Tools/run-in-container.sh) が
+ローカルビルド時だけ `--build-arg SWIFT_VERSION=6.2` を渡すようにして
+この問題を回避している。Google Cloud Build (`cloudbuild.yaml`) 側は
+x86_64 ネイティブ環境で `swift:6.3` のまま問題なく動いているので、
+そちらは変更していない (1 本の Containerfile を両環境で使い分けている)。
+
+手で `container build` する場合も同様に指定できる:
+
+```
+container build --build-arg SWIFT_VERSION=6.2 -t tiledflipper-server -f Server/Containerfile Server
+```
 
 ## 参考: よく使うコマンド
 
